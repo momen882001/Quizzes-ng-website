@@ -1,1 +1,17 @@
-<router-outlet></router-outlet>
+<nz-layout class="layout">
+  <nz-header>
+    <div class="logo"></div>
+    <ul nz-menu nzTheme="dark" nzMode="horizontal">
+      <li nz-menu-item routerLink="/login">Login</li>
+      <li nz-menu-item routerLink="/signup">Signup</li>
+    </ul>
+  </nz-header>
+  <nz-content>
+    <nz-breadcrumb style="margin-bottom: 1rem;" nzFlex="auto" [nzAutoGenerate]="true">
+      <nz-breadcrumb-item >Home</nz-breadcrumb-item>
+      <nz-breadcrumb-item>Login</nz-breadcrumb-item>
+    </nz-breadcrumb>
+    <router-outlet></router-outlet>
+  </nz-content>
+  <nz-footer>Quizzes App 3S @2023</nz-footer>
+</nz-layout>

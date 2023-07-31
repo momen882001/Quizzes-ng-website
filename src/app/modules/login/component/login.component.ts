@@ -8,6 +8,7 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 })
 export class LoginComponent implements OnInit{
   validateForm!: UntypedFormGroup;
+  constructor(private fb: UntypedFormBuilder) {}
 
   submitForm(): void {
     if (this.validateForm.valid) {
@@ -22,13 +23,13 @@ export class LoginComponent implements OnInit{
     }
   }
 
-  constructor(private fb: UntypedFormBuilder) {}
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      userName: [null, [Validators.required]],
+      userName: [null, [Validators.required , Validators.email]],
       password: [null, [Validators.required]],
       remember: [true]
     });
   }
+
 }

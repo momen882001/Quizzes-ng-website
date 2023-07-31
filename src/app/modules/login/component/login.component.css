@@ -1,5 +1,20 @@
 .login-form {
-  max-width: 300px;
+  width: 20rem;
+
+}
+
+.login-container {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login-container h1 {
+  text-align: center;
 }
 
 .login-form-margin {
@@ -12,4 +27,10 @@
 
 .login-form-button {
   width: 100%;
+}
+
+.separator {
+  width: 60%;
+  border: 0.7px dashed #1890ff;
+  margin: 1rem 20% 1rem 20%;
 }

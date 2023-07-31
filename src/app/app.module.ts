@@ -10,6 +10,7 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgZorroAntdModule } from './core/shared-modules/ng-zorro-antd/ng-zorro-antd.module';
 
 registerLocaleData(en);
 
@@ -23,6 +24,7 @@ registerLocaleData(en);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    NgZorroAntdModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }
