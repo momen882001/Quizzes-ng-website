@@ -17,7 +17,16 @@ export class SignupComponent implements OnInit {
   constructor(private fb: UntypedFormBuilder) {}
 
   submitForm(): void {
-    console.log('submit', this.validateForm.value);
+    if (this.validateForm.valid) {
+      console.log('submit', this.validateForm.value);
+    } else {
+      Object.values(this.validateForm.controls).forEach(control => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
+    }
   }
 
   resetForm(e: MouseEvent): void {
@@ -52,13 +61,13 @@ export class SignupComponent implements OnInit {
     this.validateForm = this.fb.group({
       userName: ['', [Validators.required]],
       email: ['', [Validators.email, Validators.required]],
-      password: ['', [Validators.required]],
+      password: ['', [Validators.required , Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]],
       confirm: ['', [this.confirmValidator]],
       fullname: ['', [Validators.required]],
       country: ['', [Validators.required]],
       address: ['', [Validators.required]],
-      role: [null, [Validators.required]],
-      phoneNumber: [null, [Validators.required]],
+      role: ['', [Validators.required]],
+      phoneNumber: [null, [Validators.required , Validators.pattern('[0-9]{10}')]],
     });
   }
 

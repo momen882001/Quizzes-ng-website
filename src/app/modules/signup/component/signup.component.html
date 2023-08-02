@@ -1,100 +1,235 @@
-<div class="signup-container">
-  <h1>Sign-Up</h1>
-  <div class="separator"></div>
-  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
-    <nz-form-item>
-      <nz-form-label [nzSpan]="7" nzRequired>Fullname</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="fullnameErrorTpl">
-        <input nz-input formControlName="fullname" placeholder="please write your fullname" />
-        <ng-template #fullnameErrorTpl let-control>
-          <ng-container *ngIf="control.hasError('required')">Please input your fullname!</ng-container>
-          <ng-container *ngIf="control.hasError('duplicated')">The fullname is redundant!</ng-container>
-        </ng-template>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSpan]="7" nzRequired>Username</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
-        <input nz-input formControlName="userName" placeholder="username" />
-        <ng-template #userErrorTpl let-control>
-          <ng-container *ngIf="control.hasError('required')">Please input your username!</ng-container>
-          <ng-container *ngIf="control.hasError('duplicated')">The username is redundant!</ng-container>
-        </ng-template>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSpan]="7" nzRequired>E-mail</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="emailErrorTpl">
-        <input nz-input formControlName="email" placeholder="email" type="email" />
-        <ng-template #emailErrorTpl let-control>
-          <ng-container *ngIf="control.hasError('email')">The input is not valid E-mail!</ng-container>
-          <ng-container *ngIf="control.hasError('required')">Please input your E-mail!</ng-container>
-        </ng-template>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSpan]="7" nzRequired>Password</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input your password!">
-        <input nz-input type="password" formControlName="password" (ngModelChange)="validateConfirmPassword()" />
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSpan]="7" nzRequired>Confirm Password</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="passwordErrorTpl">
-        <input nz-input type="password" formControlName="confirm" placeholder="confirm your password" />
-        <ng-template #passwordErrorTpl let-control>
-          <ng-container *ngIf="control.hasError('required')">Please confirm your password!</ng-container>
-          <ng-container *ngIf="control.hasError('confirm')">Password is inconsistent!</ng-container>
-        </ng-template>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSpan]="7" nzRequired>Country</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="countryErrorTpl">
-        <input nz-input formControlName="country" placeholder="please write your country" />
-        <ng-template #countryErrorTpl let-control>
-          <ng-container *ngIf="control.hasError('required')">Please input your country!</ng-container>
-        </ng-template>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSpan]="7" nzRequired>Address</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="addressErrorTpl">
-        <input nz-input formControlName="address" placeholder="please write your address" />
-        <ng-template #addressErrorTpl let-control>
-          <ng-container *ngIf="control.hasError('required')">Please input your address!</ng-container>
-        </ng-template>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSpan]="7" nzRequired>Phone Number</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="phoneErrorTpl">
-        <input nz-input type="number" formControlName="phoneNumber" placeholder="please write your phone" />
-        <ng-template #phoneErrorTpl let-control>
-          <ng-container *ngIf="control.hasError('required')">Please input your phone!</ng-container>
-        </ng-template>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSpan]="7" nzFor="gender" nzRequired>Role</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzErrorTip="Please select your gender!">
-        <nz-select
-          id="role"
-          formControlName="role"
-          nzPlaceHolder="Select a option and change input text above"
-          (ngModelChange)="genderChange($event)"
-        >
-          <nz-option nzValue="0" nzLabel="Student"></nz-option>
-          <nz-option nzValue="1" nzLabel="Teacher"></nz-option>
-        </nz-select>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-control [nzOffset]="7" [nzSpan]="12">
-        <button nz-button nzType="primary" [disabled]="!validateForm.valid">Submit</button>
-        <button nz-button (click)="resetForm($event)">Reset</button>
-      </nz-form-control>
-    </nz-form-item>
-  </form>
-
+<div class="row" style="margin: 0">
+  <div
+    class="col-12"
+    style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 90vh;
+    "
+  >
+    <div class="signup-container">
+      <h1>Sign-Up</h1>
+      <div class="separator"></div>
+      <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzRequired>Fullname</nz-form-label>
+          <nz-form-control
+            [nzSpan]="12"
+            nzHasFeedback
+            nzValidatingTip="Validating..."
+            [nzErrorTip]="fullnameErrorTpl"
+          >
+            <input
+              nz-input
+              formControlName="fullname"
+              placeholder="write your fullname"
+            />
+            <ng-template #fullnameErrorTpl let-control>
+              <ng-container *ngIf="control.hasError('required')"
+                >Please input your fullname!</ng-container
+              >
+              <ng-container *ngIf="control.hasError('duplicated')"
+                >The fullname is redundant!</ng-container
+              >
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzRequired>Username</nz-form-label>
+          <nz-form-control
+            [nzSpan]="12"
+            nzHasFeedback
+            nzValidatingTip="Validating..."
+            [nzErrorTip]="userErrorTpl"
+          >
+            <input
+              nz-input
+              formControlName="userName"
+              placeholder="write your username"
+            />
+            <ng-template #userErrorTpl let-control>
+              <ng-container *ngIf="control.hasError('required')"
+                >Please input your username!</ng-container
+              >
+              <ng-container *ngIf="control.hasError('duplicated')"
+                >The username is redundant!</ng-container
+              >
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzRequired>E-mail</nz-form-label>
+          <nz-form-control
+            [nzSpan]="12"
+            nzHasFeedback
+            [nzErrorTip]="emailErrorTpl"
+          >
+            <input
+              nz-input
+              formControlName="email"
+              placeholder="ex : user@22.com "
+              type="email"
+            />
+            <ng-template #emailErrorTpl let-control>
+              <ng-container *ngIf="control.hasError('email')"
+                >The input is not valid E-mail!</ng-container
+              >
+              <ng-container *ngIf="control.hasError('required')"
+                >Please input your E-mail!</ng-container
+              >
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzRequired>Password</nz-form-label>
+          <nz-form-control
+            [nzSpan]="12"
+            nzHasFeedback
+            [nzErrorTip]="passwordErrorTpl"
+          >
+            <input
+              nz-input
+              type="password"
+              formControlName="password"
+              placeholder="write your password"
+              (ngModelChange)="validateConfirmPassword()"
+            />
+            <ng-template #passwordErrorTpl let-control>
+              <ng-container *ngIf="control.hasError('required')"
+                >Please write your password!</ng-container
+              >
+              <ng-container *ngIf="control.hasError('pattern')">
+                please write invalid password!
+                <!-- <ul>
+                  <li>At least 8 characters in length</li>
+                  <li>Lowercase letters</li>
+                  <li>Uppercase letters</li>
+                  <li>Numbers</li>
+                  <li>Special characters</li>
+                </ul> -->
+              </ng-container>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzRequired>Confirm Pass</nz-form-label>
+          <nz-form-control
+            [nzSpan]="12"
+            nzHasFeedback
+            [nzErrorTip]="confirmErrorTpl"
+          >
+            <input
+              nz-input
+              type="password"
+              formControlName="confirm"
+              placeholder="confirm your password"
+            />
+            <ng-template #confirmErrorTpl let-control>
+              <ng-container *ngIf="control.hasError('required')"
+                >Please confirm your password!</ng-container
+              >
+              <ng-container *ngIf="control.hasError('confirm')"
+                >Password is inconsistent!</ng-container
+              >
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzRequired>Country</nz-form-label>
+          <nz-form-control
+            [nzSpan]="12"
+            nzHasFeedback
+            nzValidatingTip="Validating..."
+            [nzErrorTip]="countryErrorTpl"
+          >
+            <input
+              nz-input
+              formControlName="country"
+              placeholder="write your country"
+            />
+            <ng-template #countryErrorTpl let-control>
+              <ng-container *ngIf="control.hasError('required')"
+                >Please input your country!</ng-container
+              >
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzRequired>Address</nz-form-label>
+          <nz-form-control
+            [nzSpan]="12"
+            nzHasFeedback
+            nzValidatingTip="Validating..."
+            [nzErrorTip]="addressErrorTpl"
+          >
+            <input
+              nz-input
+              formControlName="address"
+              placeholder="please write your address"
+            />
+            <ng-template #addressErrorTpl let-control>
+              <ng-container *ngIf="control.hasError('required')"
+                >Please input your address!</ng-container
+              >
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzRequired>Phone Number</nz-form-label>
+          <nz-form-control
+            [nzSpan]="12"
+            nzHasFeedback
+            nzValidatingTip="Validating..."
+            [nzErrorTip]="phoneErrorTpl"
+          >
+            <input
+              nz-input
+              type="number"
+              formControlName="phoneNumber"
+              placeholder="please write your phone"
+            />
+            <ng-template #phoneErrorTpl let-control>
+              <ng-container *ngIf="control.hasError('required')"
+                >Please input your phone!</ng-container
+              >
+              <ng-container *ngIf="control.hasError('pattern')"
+                >Please input valid phone number!</ng-container
+              >
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label nzRequired [nzSpan]="7" nzFor="gender" nzRequired
+            >Role</nz-form-label
+          >
+          <nz-form-control
+            nzHasFeedback
+            [nzSpan]="12"
+            nzErrorTip="Please select your role!"
+          >
+            <nz-select
+              formControlName="role"
+              nzPlaceHolder="Select a option and change input text above"
+              (ngModelChange)="genderChange($event)"
+            >
+              <nz-option nzValue="0" nzLabel="Student"></nz-option>
+              <nz-option nzValue="1" nzLabel="Teacher"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control [nzOffset]="7" [nzSpan]="12">
+            <button
+              nz-button
+              style="background-color: #034685 !important; color: #fff; margin-bottom: 0.5rem;"
+            >
+              Submit
+            </button>
+            <button nz-button (click)="resetForm($event)">Reset</button>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    </div>
+  </div>
 </div>
