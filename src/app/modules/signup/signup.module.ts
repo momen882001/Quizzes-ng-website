@@ -13,8 +13,8 @@ import { NgZorroAntdModule } from 'src/app/core/shared-modules/ng-zorro-antd/ng-
     CommonModule,
     FormsModule,
     SignupRoutingModule,
-    NgZorroAntdModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgZorroAntdModule
   ]
 })
 export class SignupModule { }
