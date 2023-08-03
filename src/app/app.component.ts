@@ -10,8 +10,5 @@ export class AppComponent {
   constructor(private breadcrumbService: BreadcrumbService, private route: ActivatedRoute) {}
 
 ngOnInit() {
-  this.route.params.subscribe(params => {
-    this.breadcrumbService.set('@<alias>', '<breadcrumb label>')
-  });
 }
 }

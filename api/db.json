@@ -1,0 +1,16 @@
+{
+  "users": [
+    {
+      "userName": "elmo2",
+      "email": "momen2001@gmail.com",
+      "password": "Momen882001*",
+      "confirm": "Momen882001*",
+      "fullname": "Mo'men Mohamed",
+      "country": "Egypt",
+      "address": "العروبه",
+      "role": "st",
+      "phoneNumber": 1003877481,
+      "id": 1
+    }
+  ]
+}

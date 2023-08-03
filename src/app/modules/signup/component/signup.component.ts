@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
   UntypedFormBuilder,
@@ -6,6 +7,7 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -14,13 +16,28 @@ import {
 })
 export class SignupComponent implements OnInit {
   validateForm!: UntypedFormGroup;
-  constructor(private fb: UntypedFormBuilder) {}
+  constructor(
+    private fb: UntypedFormBuilder,
+    private router: Router,
+    private http: HttpClient
+  ) {}
 
   submitForm(): void {
     if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
+      this.http
+        .post<any>('/api/users', this.validateForm.value)
+        .subscribe(
+          (res: any) => {
+            console.log(res);
+            this.router.navigate(['/login']);
+          },
+          (err: any) => {
+            console.log(err);
+          }
+        );
     } else {
-      Object.values(this.validateForm.controls).forEach(control => {
+      Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {
           control.markAsDirty();
           control.updateValueAndValidity({ onlySelf: true });
@@ -61,13 +78,24 @@ export class SignupComponent implements OnInit {
     this.validateForm = this.fb.group({
       userName: ['', [Validators.required]],
       email: ['', [Validators.email, Validators.required]],
-      password: ['', [Validators.required , Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(
+            '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,}'
+          ),
+        ],
+      ],
       confirm: ['', [this.confirmValidator]],
       fullname: ['', [Validators.required]],
       country: ['', [Validators.required]],
       address: ['', [Validators.required]],
       role: ['', [Validators.required]],
-      phoneNumber: [null, [Validators.required , Validators.pattern('[0-9]{10}')]],
+      phoneNumber: [
+        null,
+        [Validators.required, Validators.pattern('[0-9]{10}')],
+      ],
     });
   }
 
