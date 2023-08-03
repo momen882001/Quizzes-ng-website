@@ -17,6 +17,18 @@ const routes: Routes = [
         (signup) => signup.SignupModule
       ),
   },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./modules/admin/admin.module').then((admin) => admin.AdminModule),
+  },
+  {
+    path: 'teacher',
+    loadChildren: () =>
+      import('./modules/teacher/teacher.module').then(
+        (teacher) => teacher.TeacherModule
+      ),
+  },
 ];
 
 @NgModule({
