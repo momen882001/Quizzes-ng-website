@@ -6,14 +6,14 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () =>
-      import('./modules/login/login.module').then(
+      import('./modules/auth/login/login.module').then(
         (login) => login.LoginModule
       ),
   },
   {
     path: 'signup',
     loadChildren: () =>
-      import('./modules/signup/signup.module').then(
+      import('./modules/auth/signup/signup.module').then(
         (signup) => signup.SignupModule
       ),
   },

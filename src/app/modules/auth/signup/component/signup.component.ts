@@ -8,6 +8,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { User } from '../user.model';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -18,24 +20,12 @@ export class SignupComponent implements OnInit {
   validateForm!: UntypedFormGroup;
   constructor(
     private fb: UntypedFormBuilder,
-    private router: Router,
-    private http: HttpClient
+    private authService: AuthService
   ) {}
 
   submitForm(): void {
     if (this.validateForm.valid) {
-      console.log('submit', this.validateForm.value);
-      this.http
-        .post<any>('/api/users', this.validateForm.value)
-        .subscribe(
-          (res: any) => {
-            console.log(res);
-            this.router.navigate(['/login']);
-          },
-          (err: any) => {
-            console.log(err);
-          }
-        );
+      this.authService.signUp(this.validateForm.value);
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {
@@ -59,7 +49,7 @@ export class SignupComponent implements OnInit {
 
   validateConfirmPassword(): void {
     setTimeout(() =>
-      this.validateForm.controls['confirm'].updateValueAndValidity()
+      this.validateForm.controls['confirmPassword'].updateValueAndValidity()
     );
   }
 
@@ -87,14 +77,14 @@ export class SignupComponent implements OnInit {
           ),
         ],
       ],
-      confirm: ['', [this.confirmValidator]],
-      fullname: ['', [Validators.required]],
+      confirmPassword: ['', [this.confirmValidator]],
+      fullName: ['', [Validators.required]],
       country: ['', [Validators.required]],
       address: ['', [Validators.required]],
       role: ['', [Validators.required]],
       phoneNumber: [
-        null,
-        [Validators.required, Validators.pattern('[0-9]{10}')],
+        '',
+        [Validators.required, Validators.pattern('[0-9]{11}')],
       ],
     });
   }

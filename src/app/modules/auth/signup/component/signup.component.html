@@ -22,8 +22,8 @@
           >
             <input
               nz-input
-              formControlName="fullname"
-              placeholder="write your fullname"
+              formControlName="fullName"
+              placeholder="Write your fullname"
             />
             <ng-template #fullnameErrorTpl let-control>
               <ng-container *ngIf="control.hasError('required')"
@@ -46,7 +46,7 @@
             <input
               nz-input
               formControlName="userName"
-              placeholder="write your username"
+              placeholder="Write your username"
             />
             <ng-template #userErrorTpl let-control>
               <ng-container *ngIf="control.hasError('required')"
@@ -92,7 +92,7 @@
               nz-input
               type="password"
               formControlName="password"
-              placeholder="write your password"
+              placeholder="Write your password"
               (ngModelChange)="validateConfirmPassword()"
             />
             <ng-template #passwordErrorTpl let-control>
@@ -122,8 +122,8 @@
             <input
               nz-input
               type="password"
-              formControlName="confirm"
-              placeholder="confirm your password"
+              formControlName="confirmPassword"
+              placeholder="Confirm your password"
             />
             <ng-template #confirmErrorTpl let-control>
               <ng-container *ngIf="control.hasError('required')"
@@ -146,7 +146,7 @@
             <input
               nz-input
               formControlName="country"
-              placeholder="write your country"
+              placeholder="Write your country"
             />
             <ng-template #countryErrorTpl let-control>
               <ng-container *ngIf="control.hasError('required')"
@@ -166,7 +166,7 @@
             <input
               nz-input
               formControlName="address"
-              placeholder="please write your address"
+              placeholder="Write your address"
             />
             <ng-template #addressErrorTpl let-control>
               <ng-container *ngIf="control.hasError('required')"
@@ -185,22 +185,21 @@
           >
             <input
               nz-input
-              type="number"
               formControlName="phoneNumber"
-              placeholder="please write your phone"
+              placeholder="Write your phone number"
             />
             <ng-template #phoneErrorTpl let-control>
               <ng-container *ngIf="control.hasError('required')"
                 >Please input your phone!</ng-container
               >
               <ng-container *ngIf="control.hasError('pattern')"
-                >Please input valid phone number!</ng-container
+                >Your phone should be 11 numbers</ng-container
               >
             </ng-template>
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
-          <nz-form-label nzRequired [nzSpan]="7" nzFor="gender" nzRequired
+          <nz-form-label nzRequired [nzSpan]="7" nzFor="role" nzRequired
             >Role</nz-form-label
           >
           <nz-form-control

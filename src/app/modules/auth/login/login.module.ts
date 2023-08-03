@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './component/login.component';
 import { LoginRoutingModule } from './login-routing.module';
-import { NgZorroAntdModule } from '../../core/shared-modules/ng-zorro-antd/ng-zorro-antd.module'
+import { NgZorroAntdModule } from '../../../core/shared-modules/ng-zorro-antd/ng-zorro-antd.module'
 
 
 
