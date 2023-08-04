@@ -2,21 +2,28 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from './signup/user.model';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private message: NzMessageService
+  ) {}
 
   signUp(signupData: User): void {
     this.http.post<User>('/api/users', signupData).subscribe(
       (resData: User) => {
-        console.log(resData);
+        this.message.create( "success", "Signed up successfully" , {
+          nzDuration : 3000
+        });
         if (resData.role === 'te') {
           this.router.navigate(['/teacher']);
-        } else {
-          this.router.navigate(['/login']);
+        } else if (resData.role === 'st') {
+          this.router.navigate(['/student']);
         }
       },
       (err: any) => {
@@ -33,15 +40,28 @@ export class AuthService {
             userData.email === loginData.email &&
             userData.password === loginData.password
           ) {
+            this.message.create('success', 'Logined successfully', {
+              nzDuration: 4000,
+            });
             if (userData.role === 'ad') {
               this.router.navigate(['/admin']);
             } else if (userData.role === 'te') {
               this.router.navigate(['/teacher']);
-            } else {
-              alert('student');
+            } else if (userData.role === 'st') {
+              this.router.navigate(['/student']);
             }
-          } else {
-            alert('You should sign up, this email doesnot exist');
+          } else if (userData.email !== loginData.email) {
+            this.message.create(
+              'error',
+              'Your email is incorrect',
+              {
+                nzDuration: 4000,
+              }
+            );
+          } else if (userData.password !== loginData.password) {
+            this.message.create('error', 'Your password is incorrect', {
+              nzDuration: 4000,
+            });
           }
         });
       },
