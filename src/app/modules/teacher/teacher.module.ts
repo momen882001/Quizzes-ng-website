@@ -5,9 +5,10 @@ import { TeacherRoutingModule } from './teacher-routing.module';
 import { ResultsComponent } from './components/results/results.component';
 import { SubjectsComponent } from './components/subjects/subjects.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { SharedModule } from 'src/app/core/shared/shared.module';
 
 @NgModule({
   declarations: [TeacherComponent,ResultsComponent, SubjectsComponent, ProfileComponent],
-  imports: [CommonModule, TeacherRoutingModule],
+  imports: [CommonModule, TeacherRoutingModule, SharedModule],
 })
 export class TeacherModule {}

@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HeaderComponent } from 'src/app/modules/header/header.component';
 
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzAnchorModule } from 'ng-zorro-antd/anchor';
@@ -69,9 +71,16 @@ import { NzAffixModule } from 'ng-zorro-antd/affix';
 
 
 
-
 @NgModule({
-  exports: [
+  declarations : [
+    HeaderComponent,
+  ],
+  imports : [
+    CommonModule
+  ],
+  exports : [
+    HeaderComponent,
+    CommonModule,
     NzAffixModule,
     NzAlertModule,
     NzAnchorModule,
@@ -140,4 +149,4 @@ import { NzAffixModule } from 'ng-zorro-antd/affix';
     NzPipesModule,
   ]
 })
-export class NgZorroAntdModule { }
+export class SharedModule { }

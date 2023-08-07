@@ -1,0 +1,29 @@
+.layout {
+  min-height: 100vh;
+}
+
+.logo {
+  color: white;
+  height: auto;
+  margin: 1.5rem 1.5rem 3rem 1.5rem;
+  overflow: hidden;
+}
+
+nz-slider {
+  position: fixed;
+  height: 100vh;
+}
+
+nz-content {
+  margin: 24px 16px 0;
+  overflow: scroll;
+}
+
+.inner-content {
+  padding: 24px;
+  background: #fff;
+  min-height: 360px;
+  overflow: scroll;
+}
+
+

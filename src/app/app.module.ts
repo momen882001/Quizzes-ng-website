@@ -1,4 +1,4 @@
-import { SharedModule } from './core/shared-modules/shared/shared.module';
+import { SharedModule } from './core/shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -11,7 +11,6 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgZorroAntdModule } from './core/shared-modules/ng-zorro-antd/ng-zorro-antd.module';
 
 registerLocaleData(en);
 
@@ -25,7 +24,6 @@ registerLocaleData(en);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgZorroAntdModule,
     SharedModule
   ],
   providers: [
