@@ -1,3 +1,4 @@
+import { SharedModule } from './../../../core/shared-modules/shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -9,13 +10,14 @@ import { NgZorroAntdModule } from '../../../core/shared-modules/ng-zorro-antd/ng
 
 
 @NgModule({
-  declarations: [LoginComponent],
-  imports: [
-    CommonModule,
-    FormsModule,
-    LoginRoutingModule,
-    ReactiveFormsModule,
-    NgZorroAntdModule
-  ]
+    declarations: [LoginComponent],
+    imports: [
+        CommonModule,
+        FormsModule,
+        LoginRoutingModule,
+        ReactiveFormsModule,
+        NgZorroAntdModule,
+        SharedModule
+    ]
 })
 export class LoginModule { }

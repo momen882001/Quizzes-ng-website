@@ -1,3 +1,4 @@
+import { SharedModule } from './../../../core/shared-modules/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,7 +15,8 @@ import { NgZorroAntdModule } from 'src/app/core/shared-modules/ng-zorro-antd/ng-
     FormsModule,
     SignupRoutingModule,
     ReactiveFormsModule,
-    NgZorroAntdModule
+    NgZorroAntdModule,
+    SharedModule
   ]
 })
 export class SignupModule { }

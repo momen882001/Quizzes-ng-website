@@ -1,3 +1,4 @@
+import { SharedModule } from './core/shared-modules/shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -11,14 +12,12 @@ import en from '@angular/common/locales/en';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgZorroAntdModule } from './core/shared-modules/ng-zorro-antd/ng-zorro-antd.module';
-import { HeaderComponent } from './modules/header/header.component';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,6 +26,7 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule,
     NgZorroAntdModule,
+    SharedModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }
