@@ -1,1 +1,47 @@
-<p>subjects works!</p>
+<div class="container">
+  <div class="row" style="margin: 1rem 0rem 1rem 0rem">
+    <div
+      class="col-xs-2 col-sm-2 col-md-3 col-lg-3"
+      style="padding-left: 0; margin-bottom: 1rem"
+    >
+      <button nz-button nzType="primary" (click)="onCreateSubject()">
+        Create subject<i nz-icon nzType="plus-circle" nzTheme="outline"></i>
+      </button>
+    </div>
+    <div
+      *ngIf="createSubjectFlag"
+      class="col-xs-12 col-sm-12 col-md-5 col-lg-5"
+    >
+      <form
+        nz-form
+        [formGroup]="validateForm"
+        class="login-form"
+        (ngSubmit)="submitForm()"
+      >
+        <nz-form-item style="width: auto">
+          <nz-form-control
+            nzHasFeedback
+            nzErrorTip="Please input subject name!"
+          >
+            <nz-input-group nzPrefixIcon="book">
+              <input
+                type="text"
+                nz-input
+                formControlName="subject"
+                placeholder="Input your subject name!"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <button nz-button nzType="primary">
+          Submit<i nz-icon nzType="send" nzTheme="outline"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col col-lg-4 col-md-6 col-sm-12 col-xs-12">Column</div>
+    <div class="col col-lg-4 col-md-6 col-sm-12 col-xs-12">Column</div>
+    <div class="col col-lg-4 col-md-12 col-sm-12 col-xs-12">Column</div>
+  </div>
+</div>
