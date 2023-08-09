@@ -34,14 +34,25 @@
           </nz-form-control>
         </nz-form-item>
         <button nz-button nzType="primary">
-          Submit<i nz-icon nzType="send" nzTheme="outline"></i>
+          {{editMode ? 'Edit' : 'Submit'}}<i nz-icon nzType="send" nzTheme="outline"></i>
         </button>
       </form>
     </div>
   </div>
   <div class="row">
-    <div class="col col-lg-4 col-md-6 col-sm-12 col-xs-12">Column</div>
-    <div class="col col-lg-4 col-md-6 col-sm-12 col-xs-12">Column</div>
-    <div class="col col-lg-4 col-md-12 col-sm-12 col-xs-12">Column</div>
+    <div
+      class="col-lg-4 col-md-6 col-sm-12 col-xs-12"
+      *ngFor="let subjectEl of subjects"
+    >
+      <div class="subject-container">
+        <div class="subject-title">
+          {{subjectEl.subject}}
+        </div>
+        <div class="subject-buttons">
+          <button (click)="onSubjectEdit(subjectEl.id,subjectEl.subject)">edit</button>
+          <button (click)="onSubjectDelete(subjectEl.id)">delete</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

@@ -14,16 +14,30 @@ import { SubjectsService } from './subjects.service';
 })
 export class SubjectsComponent implements OnInit {
   validateForm!: UntypedFormGroup;
-  createSubjectFlag : boolean = false;
+  createSubjectFlag: boolean = false;
+  subjects!: any[];
+  editMode: boolean = false;
+  subjectId!: number;
 
-  constructor(private fb: UntypedFormBuilder, private subjectsService : SubjectsService) {}
+  constructor(
+    private fb: UntypedFormBuilder,
+    private subjectsService: SubjectsService
+  ) {}
 
   submitForm(): void {
     if (this.validateForm.valid) {
-      console.log(this.validateForm.value);
-      this.subjectsService.addSubject(this.validateForm.value)
+      if (this.editMode) {
+        console.log(this.validateForm.value);
+        this.subjectsService.updateSubject(
+          this.subjectId,
+          this.validateForm.value
+        );
+        this.editMode = false;
+      } else {
+        this.subjectsService.addSubject(this.validateForm.value);
+      }
       this.validateForm.reset();
-      this.createSubjectFlag = false
+      this.createSubjectFlag = false;
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {
@@ -38,9 +52,36 @@ export class SubjectsComponent implements OnInit {
     this.createSubjectFlag = true;
   }
 
+  onSubjectEdit(id: number, subjectName: string) {
+    this.createSubjectFlag = true;
+    this.editMode = true;
+    this.validateForm.setValue({
+      subject: subjectName,
+    });
+    this.subjectId = id;
+    console.log(this.subjectId);
+  }
+
+  onSubjectDelete(id: number) {
+    this.subjectsService.deleteSubject(id);
+  }
+
   ngOnInit(): void {
     this.validateForm = this.fb.group({
       subject: ['', Validators.required],
     });
+    this.loadSubjects();
+  }
+
+  private loadSubjects() {
+    this.subjectsService.getSubjects().subscribe(
+      (res: any) => {
+        console.log(res);
+        this.subjects = res;
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
   }
 }
