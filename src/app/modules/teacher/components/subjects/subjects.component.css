@@ -2,3 +2,46 @@ button {
   display: flex;
   align-items: center;
 }
+
+.subject-container {
+  background-color: #fff;
+  width: 13rem;
+  padding: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s ease;
+  margin-bottom: 1.3rem;
+  border-radius: 8px;
+  border: 1px dashed #2A4E70;
+}
+
+.subject-container:hover {
+  /* scale: 1.111; */
+}
+
+.subject-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.subject-buttons i {
+  margin-right: 0.7rem;
+  cursor: pointer;
+  font-size: large;
+  transition: 0.5s ease;
+}
+
+.subject-buttons i:hover {
+  font-size: larger;
+}
+
+.subject-buttons i:first-child {
+  color: green;
+}
+
+.subject-buttons i:last-child {
+  color: red;
+}

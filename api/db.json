@@ -17,6 +17,10 @@
     {
       "subject": "English",
       "id": 1
+    },
+    {
+      "subject": "Arabic",
+      "id": 2
     }
   ]
 }

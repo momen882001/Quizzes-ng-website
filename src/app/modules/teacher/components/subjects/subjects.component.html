@@ -34,23 +34,36 @@
           </nz-form-control>
         </nz-form-item>
         <button nz-button nzType="primary">
-          {{editMode ? 'Edit' : 'Submit'}}<i nz-icon nzType="send" nzTheme="outline"></i>
+          {{ editMode ? "Edit" : "Submit"
+          }}<i nz-icon nzType="send" nzTheme="outline"></i>
         </button>
       </form>
     </div>
   </div>
   <div class="row">
     <div
-      class="col-lg-4 col-md-6 col-sm-12 col-xs-12"
+      class="col-lg-3 col-md-3 col-sm-12 col-xs-12"
       *ngFor="let subjectEl of subjects"
     >
       <div class="subject-container">
-        <div class="subject-title">
-          {{subjectEl.subject}}
-        </div>
+        <h3 class="subject-title">
+          {{ subjectEl.subject }}
+        </h3>
         <div class="subject-buttons">
-          <button (click)="onSubjectEdit(subjectEl.id,subjectEl.subject)">edit</button>
-          <button (click)="onSubjectDelete(subjectEl.id)">delete</button>
+          <i
+            (click)="onSubjectEdit(subjectEl.id, subjectEl.subject)"
+            nz-icon
+            nzType="edit"
+            nzTheme="fill"
+          ></i>
+          <i
+            (click)="onSubjectDelete(subjectEl.id)"
+            nz-icon
+            nzType="delete"
+            nzTheme="fill"
+          ></i>
+          <!-- <button nz-button nzType="primary" (click)="onSubjectEdit(subjectEl.id,subjectEl.subject)">edit</button> -->
+          <!-- <button nz-button nzType="primary" (click)="onSubjectDelete(subjectEl.id)">delete</button> -->
         </div>
       </div>
     </div>
