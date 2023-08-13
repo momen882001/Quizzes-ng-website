@@ -4,6 +4,7 @@ import { TeacherComponent } from './teacher.component';
 import { ResultsComponent } from './components/results/results.component';
 import { SubjectsComponent } from './components/subjects/subjects.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { LevelsComponent } from './components/subjects/levels/levels.component';
 
 const teacherRoutes: Routes = [
   {
@@ -13,6 +14,7 @@ const teacherRoutes: Routes = [
       { path: 'profile', component: ProfileComponent },
       { path: 'results', component: ResultsComponent },
       { path: 'subjects', component: SubjectsComponent },
+      { path: 'subjects/:id', component: LevelsComponent },
     ],
   },
 ];

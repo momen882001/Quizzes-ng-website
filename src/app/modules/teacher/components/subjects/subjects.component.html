@@ -1,3 +1,35 @@
+<!-- <div class="container">
+
+  <div class="row">
+    <div
+      class="col-lg-3 col-md-3 col-sm-12 col-xs-12"
+      *ngFor="let subjectEl of subjects"
+    >
+      <a [routerLink]="subjectEl.id">
+        <div class="subject-container">
+          <h3 class="subject-title">
+            {{ subjectEl.subject }}
+          </h3>
+          <div class="subject-buttons">
+            <i
+              (click)="onSubjectEdit(subjectEl.id, subjectEl.subject)"
+              nz-icon
+              nzType="edit"
+              nzTheme="fill"
+            ></i>
+            <i
+              (click)="onSubjectDelete(subjectEl.id)"
+              nz-icon
+              nzType="delete"
+              nzTheme="fill"
+            ></i>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div> -->
+
 <div class="container">
   <div class="row" style="margin: 1rem 0rem 1rem 0rem">
     <div
@@ -40,32 +72,46 @@
       </form>
     </div>
   </div>
-  <div class="row">
-    <div
-      class="col-lg-3 col-md-3 col-sm-12 col-xs-12"
-      *ngFor="let subjectEl of subjects"
-    >
-      <div class="subject-container">
-        <h3 class="subject-title">
-          {{ subjectEl.subject }}
-        </h3>
-        <div class="subject-buttons">
+  <nz-table
+    #headerTable
+    style="width: 90%; margin-left: 5%"
+    [nzData]="subjects"
+    [nzPageSize]="10"
+    nzScrolly="200px"
+  >
+    <thead>
+      <tr>
+        <th>Subject name</th>
+        <th nzWidth="100px"></th>
+        <th nzWidth="100px"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of subjects">
+        <td class="table-cell" [routerLink]="[data.id]">{{ data.subject }}</td>
+        <td class="table-cell edit-subject">
           <i
-            (click)="onSubjectEdit(subjectEl.id, subjectEl.subject)"
+            (click)="onSubjectEdit(data.id, data.subject)"
             nz-icon
             nzType="edit"
-            nzTheme="fill"
+            nzTheme="outline"
           ></i>
-          <i
-            (click)="onSubjectDelete(subjectEl.id)"
-            nz-icon
-            nzType="delete"
-            nzTheme="fill"
-          ></i>
-          <!-- <button nz-button nzType="primary" (click)="onSubjectEdit(subjectEl.id,subjectEl.subject)">edit</button> -->
-          <!-- <button nz-button nzType="primary" (click)="onSubjectDelete(subjectEl.id)">delete</button> -->
-        </div>
-      </div>
-    </div>
-  </div>
+        </td>
+        <td class="table-cell delete-subject">
+          <a
+            nz-popconfirm
+            nzPopconfirmTitle="Are you sure delete this item?"
+            (nzOnConfirm)="confirm(data.id)"
+            (nzOnCancel)="cancel()"
+          >
+            <i
+              nz-icon
+              nzType="delete"
+              nzTheme="outline"
+            ></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
 </div>

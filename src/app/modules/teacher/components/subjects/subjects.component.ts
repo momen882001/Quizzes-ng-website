@@ -18,6 +18,7 @@ export class SubjectsComponent implements OnInit {
   subjects!: any[];
   editMode: boolean = false;
   subjectId!: number;
+  nzMessageService: any;
 
   constructor(
     private fb: UntypedFormBuilder,
@@ -63,6 +64,14 @@ export class SubjectsComponent implements OnInit {
   }
 
   onSubjectDelete(id: number) {
+    this.confirm(id)
+  }
+
+  cancel(): void {
+    // this.nzMessageService.info('click cancel');
+  }
+
+  confirm(id : number): void {
     this.subjectsService.deleteSubject(id);
   }
 

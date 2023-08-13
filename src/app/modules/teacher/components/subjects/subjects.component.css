@@ -17,9 +17,6 @@ button {
   border: 1px dashed #2A4E70;
 }
 
-.subject-container:hover {
-  /* scale: 1.111; */
-}
 
 .subject-buttons {
   display: flex;
@@ -38,10 +35,22 @@ button {
   font-size: larger;
 }
 
-.subject-buttons i:first-child {
-  color: green;
+
+.table-cell {
+  cursor: pointer;
 }
 
-.subject-buttons i:last-child {
-  color: red;
+.edit-subject i{
+  color: green;
+  transition: 0.5s ease;
 }
+
+.delete-subject i{
+  color: red;
+  transition: 0.3s ease;
+}
+
+.edit-subject i:hover, .delete-subject i:hover {
+  font-size: larger;
+}
+

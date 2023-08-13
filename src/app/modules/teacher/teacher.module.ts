@@ -7,9 +7,10 @@ import { SubjectsComponent } from './components/subjects/subjects.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SharedModule } from 'src/app/core/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LevelsComponent } from './components/subjects/levels/levels.component';
 
 @NgModule({
-  declarations: [TeacherComponent,ResultsComponent, SubjectsComponent, ProfileComponent],
+  declarations: [TeacherComponent,ResultsComponent, SubjectsComponent, ProfileComponent, LevelsComponent],
   imports: [CommonModule, TeacherRoutingModule, SharedModule,ReactiveFormsModule],
 })
 export class TeacherModule {}
