@@ -1,35 +1,3 @@
-<!-- <div class="container">
-
-  <div class="row">
-    <div
-      class="col-lg-3 col-md-3 col-sm-12 col-xs-12"
-      *ngFor="let subjectEl of subjects"
-    >
-      <a [routerLink]="subjectEl.id">
-        <div class="subject-container">
-          <h3 class="subject-title">
-            {{ subjectEl.subject }}
-          </h3>
-          <div class="subject-buttons">
-            <i
-              (click)="onSubjectEdit(subjectEl.id, subjectEl.subject)"
-              nz-icon
-              nzType="edit"
-              nzTheme="fill"
-            ></i>
-            <i
-              (click)="onSubjectDelete(subjectEl.id)"
-              nz-icon
-              nzType="delete"
-              nzTheme="fill"
-            ></i>
-          </div>
-        </div>
-      </a>
-    </div>
-  </div>
-</div> -->
-
 <div class="container">
   <div class="row" style="margin: 1rem 0rem 1rem 0rem">
     <div
@@ -78,6 +46,7 @@
     [nzData]="subjects"
     [nzPageSize]="10"
     nzScrolly="200px"
+
   >
     <thead>
       <tr>

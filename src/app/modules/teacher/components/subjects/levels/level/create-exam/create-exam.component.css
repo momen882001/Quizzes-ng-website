@@ -1,0 +1,32 @@
+.exam-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+
+.login-container {
+  background-color: #fff;
+  padding: 2.2rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0rem 0.5rem 0rem 0.5rem;
+}
+
+.login-container h1 {
+  text-align: center;
+}
+
+.exam-form-button {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.separator {
+  width: 60%;
+  border: 0.7px dashed #1890ff;
+  margin: 1rem 20% 1rem 20%;
+}

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { SubjectsService } from '../subjects.service';
+import { SubjectsService } from '../service/subjects.service';
 import { LevelsService } from './service/levels.service';
 
 @Component({

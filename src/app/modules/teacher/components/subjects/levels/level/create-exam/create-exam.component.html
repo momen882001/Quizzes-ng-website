@@ -1,0 +1,90 @@
+<div class="row" style="margin: 0">
+  <div
+    class="col-12 exam-col"
+  >
+    <div class="login-container">
+      <h2>Create Exam</h2>
+      <div class="separator"></div>
+      <form
+        nz-form
+        [formGroup]="validateForm"
+        (ngSubmit)="submitForm()"
+      >
+        <nz-form-item>
+          <nz-form-control
+            nzHasFeedback
+            nzValidatingTip="Validating..."
+            nzErrorTip="Please input your exam title!"
+          >
+            <nz-form-label nzRequired>Title</nz-form-label>
+            <nz-input-group>
+              <input
+                type="text"
+                nz-input
+                formControlName="examTitle"
+                placeholder="write your exam title"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control
+            nzHasFeedback
+            nzValidatingTip="Validating..."
+            [nzErrorTip]="questionNumberError"
+          >
+            <nz-form-label nzRequired>No. Questions</nz-form-label>
+            <nz-input-group>
+              <input
+                nz-input
+                type="number"
+                formControlName="questionNumber"
+                placeholder="Write Number of questions"
+              />
+            </nz-input-group>
+            <ng-template #questionNumberError let-control>
+              <ng-container *ngIf="control.hasError('required')"
+                >Please input number of questions!</ng-container
+              >
+              <ng-container *ngIf="control.hasError('pattern')"
+                >Number is not valid!</ng-container
+              >
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control
+            nzHasFeedback
+            nzValidatingTip="Validating..."
+            [nzErrorTip]="timeError"
+          >
+            <nz-form-label nzRequired>Time in minutes</nz-form-label>
+            <nz-input-group>
+              <input
+                nz-input
+                type="number"
+                formControlName="time"
+                placeholder="Write exam time in minutes"
+              />
+            </nz-input-group>
+            <ng-template #timeError let-control>
+              <ng-container *ngIf="control.hasError('required')"
+                >Please input time of exam!</ng-container
+              >
+              <ng-container *ngIf="control.hasError('pattern')"
+                >Time is not valid!</ng-container
+              >
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <button
+          nz-button
+          class="exam-form-button"
+          [nzType]="'primary'"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

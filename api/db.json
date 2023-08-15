@@ -1,13 +1,13 @@
 {
   "users": [
     {
-      "userName": "Moka2001",
+      "userName": "Moka",
       "email": "momen22@gmail.com",
       "password": "Moka882001*",
       "confirmPassword": "Moka882001*",
-      "fullName": "Moka",
+      "fullName": "Mo'men Mohamed",
       "country": "Egypt",
-      "address": "Haram",
+      "address": "العروبه",
       "role": "te",
       "phoneNumber": "01003877481",
       "id": 1
@@ -20,6 +20,30 @@
     },
     {
       "subject": "French",
+      "id": 3
+    },
+    {
+      "subject": "Arabic",
+      "id": 4
+    }
+  ],
+  "exams": [
+    {
+      "examTitle": "Exam 1",
+      "questionNumber": 20,
+      "time": 10,
+      "id": 1
+    },
+    {
+      "examTitle": "Exam 2",
+      "questionNumber": 40,
+      "time": 30,
+      "id": 2
+    },
+    {
+      "examTitle": "exam3 ",
+      "questionNumber": 10,
+      "time": 40,
       "id": 3
     }
   ]

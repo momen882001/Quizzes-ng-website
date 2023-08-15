@@ -5,7 +5,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { SubjectsService } from './subjects.service';
+import { SubjectsService } from './service/subjects.service';
 
 @Component({
   selector: 'app-subjects',
