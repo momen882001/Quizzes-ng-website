@@ -1,3 +1,4 @@
+import { ViewQuestionsComponent } from './components/subjects/levels/level/view-questions/view-questions.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TeacherComponent } from './teacher.component';
@@ -19,8 +20,9 @@ const teacherRoutes: Routes = [
       { path: 'subjects', component: SubjectsComponent },
       { path: 'subjects/:subjectId', component: LevelsComponent },
       { path: 'subjects/:subjectId/level', component: LevelComponent },
-      { path: 'subjects/:subjectId/level/ques', component: QuestionsComponent },
+      { path: 'subjects/:subjectId/level/createQues', component: QuestionsComponent },
       { path: 'subjects/:subjectId/level/createExam', component: CreateExamComponent },
+      { path: 'subjects/:subjectId/level/viewQues', component: ViewQuestionsComponent },
     ],
   },
 ];

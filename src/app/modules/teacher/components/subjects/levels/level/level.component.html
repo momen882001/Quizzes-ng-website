@@ -1,1 +1,21 @@
-<p>level works!</p>
+<form [formGroup]="validateForm">
+  <nz-form-item>
+    <nz-form-control
+      nzHasFeedback
+      [nzSpan]="12"
+      nzErrorTip="Please select your role!"
+    >
+      <nz-select
+        formControlName="mode"
+        nzPlaceHolder="Select a option and change input text above"
+        (ngModelChange)="modeChange($event)"
+      >
+        <nz-option nzValue="CQ" nzLabel="Create Questions"></nz-option>
+        <nz-option nzValue="CE" nzLabel="Create Exam"></nz-option>
+        <nz-option nzValue="VQ" nzLabel="View Questions"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+<router-outlet></router-outlet>
+

@@ -11,9 +11,10 @@ import { LevelsComponent } from './components/subjects/levels/levels.component';
 import { QuestionsComponent } from './components/subjects/levels/level/questions/questions.component';
 import { LevelComponent } from './components/subjects/levels/level/level.component';
 import { CreateExamComponent } from './components/subjects/levels/level/create-exam/create-exam.component';
+import { ViewQuestionsComponent } from './components/subjects/levels/level/view-questions/view-questions.component';
 
 @NgModule({
-  declarations: [TeacherComponent,ResultsComponent, SubjectsComponent, ProfileComponent, LevelsComponent, QuestionsComponent, LevelComponent, CreateExamComponent],
+  declarations: [TeacherComponent,ResultsComponent, SubjectsComponent, ProfileComponent, LevelsComponent, QuestionsComponent, LevelComponent, CreateExamComponent, ViewQuestionsComponent],
   imports: [CommonModule, TeacherRoutingModule, SharedModule,ReactiveFormsModule],
 })
 export class TeacherModule {}
