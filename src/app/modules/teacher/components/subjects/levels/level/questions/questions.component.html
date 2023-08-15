@@ -72,16 +72,16 @@
         [formGroupName]="i"
       >
         <nz-form-control
-          nzHasFeedback
           nzValidatingTip="Validating..."
           [nzErrorTip]="wrongAnswersErrorTpl"
         >
-          <nz-form-label>Wrong answer</nz-form-label>
-          <input
-            nz-input
-            placeholder="placeholder"
-            formControlName="wrongAnswer"
-          />
+          <nz-form-label nzRequired>{{ i + 1 }}.Wrong answer </nz-form-label>
+            <input
+              class="wrong-input"
+              nz-input
+              placeholder="placeholder"
+              formControlName="wrongAnswer"
+            />
           <i
             nz-icon
             nzType="minus-circle-o"

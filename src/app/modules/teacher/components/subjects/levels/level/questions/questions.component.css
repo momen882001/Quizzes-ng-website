@@ -2,10 +2,6 @@
   max-width: 600px;
 }
 
-button {
-  margin-left: 8px;
-}
-
 .dynamic-delete-button {
   cursor: pointer;
   position: relative;
@@ -19,13 +15,9 @@ button {
   color: #777;
 }
 
-.passenger-input {
-  width: 60%;
+.wrong-input {
+  width: 30%;
   margin-right: 8px;
-}
-
-[nz-form] {
-  max-width: 600px;
 }
 
 .add-button {
