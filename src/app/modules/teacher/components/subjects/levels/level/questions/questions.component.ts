@@ -90,8 +90,8 @@ export class QuestionsComponent {
       quesTitle: ['', [Validators.required]],
       question: ['', [Validators.required]],
       rightAnswer: ['', [Validators.required]],
+      wrongAnswers: new FormArray([], Validators.required),
       description: [''],
-      wrongAnswers: new FormArray([], [Validators.required]),
     });
   }
 }

@@ -7,7 +7,7 @@
         nzValidatingTip="Validating..."
         [nzErrorTip]="titleErrorTpl"
       >
-        <nz-form-label [nzSpan]="7" nzRequired>Q.Title</nz-form-label>
+        <nz-form-label nzRequired>Q.Title</nz-form-label>
         <nz-input-group>
           <input
             nz-input
@@ -29,7 +29,7 @@
         nzValidatingTip="Validating..."
         [nzErrorTip]="quesErrorTpl"
       >
-        <nz-form-label [nzSpan]="7" nzRequired>Question</nz-form-label>
+        <nz-form-label nzRequired>Question</nz-form-label>
         <nz-input-group>
           <input
             nz-input
@@ -51,7 +51,7 @@
         nzValidatingTip="Validating..."
         [nzErrorTip]="rightAnswerErrorTpl"
       >
-        <nz-form-label [nzSpan]="7" nzRequired>Right Answer</nz-form-label>
+        <nz-form-label nzRequired>Right Answer</nz-form-label>
         <nz-input-group>
           <input
             nz-input
@@ -67,15 +67,16 @@
       </nz-form-control>
     </nz-form-item>
     <div formArrayName="wrongAnswers">
-      <nz-form-item *ngFor="let control of getControls(); let i = index">
-        <nz-form-label
-          *ngIf="i === 0"
-        >
-          Wrong Answers
-        </nz-form-label>
+      <nz-form-item
+        *ngFor="let control of getControls(); let i = index"
+        [formGroupName]="i"
+      >
         <nz-form-control
-          nzErrorTip="Please input wrong answer or delete this field."
+          nzHasFeedback
+          nzValidatingTip="Validating..."
+          [nzErrorTip]="wrongAnswersErrorTpl"
         >
+          <nz-form-label>Wrong answer</nz-form-label>
           <input
             nz-input
             placeholder="placeholder"
@@ -87,14 +88,16 @@
             class="dynamic-delete-button"
             (click)="removeField(i)"
           ></i>
+          <ng-template #wrongAnswersErrorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')"
+              >Please input wrong answer!</ng-container
+            >
+          </ng-template>
         </nz-form-control>
       </nz-form-item>
     </div>
     <nz-form-item>
-      <nz-form-control
-        [nzXs]="{ span: 24, offset: 0 }"
-        [nzSm]="{ span: 20, offset: 4 }"
-      >
+      <nz-form-control>
         <button
           nz-button
           nzType="dashed"
@@ -102,7 +105,7 @@
           (click)="addField()"
         >
           <i nz-icon nzType="plus"></i>
-          Add field
+          Add wrong answer
         </button>
       </nz-form-control>
     </nz-form-item>
@@ -119,7 +122,7 @@
     </nz-form-item>
     <nz-form-item>
       <nz-form-control [nzSpan]="12">
-        <button nz-button nzType="primary" >
+        <button nz-button nzType="primary" [disabled]="!validateForm.valid">
           Submit
         </button>
         <button nz-button (click)="resetForm($event)">Reset</button>
