@@ -1,5 +1,11 @@
 [nz-form] {
-  max-width: 600px;
+  width: 100%;
+}
+
+.questions-column {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
 }
 
 .dynamic-delete-button {
