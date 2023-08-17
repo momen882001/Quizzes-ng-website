@@ -8,10 +8,7 @@
         Create level<i nz-icon nzType="plus-circle" nzTheme="outline"></i>
       </button>
     </div>
-    <div
-      *ngIf="createSubjectFlag"
-      class="col-xs-12 col-sm-12 col-md-5 col-lg-5"
-    >
+    <div *ngIf="createLevelFlag" class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
       <form
         nz-form
         [formGroup]="validateForm"
@@ -19,10 +16,7 @@
         (ngSubmit)="submitForm()"
       >
         <nz-form-item style="width: auto">
-          <nz-form-control
-            nzHasFeedback
-            nzErrorTip="Please input level name!"
-          >
+          <nz-form-control nzHasFeedback nzErrorTip="Please input level name!">
             <nz-input-group nzPrefixIcon="book">
               <input
                 type="text"
@@ -34,35 +28,48 @@
           </nz-form-control>
         </nz-form-item>
         <button nz-button nzType="primary">
-          submit<i nz-icon nzType="send" nzTheme="outline"></i>
+          {{ editMode ? "Edit" : "Submit"
+          }}<i nz-icon nzType="send" nzTheme="outline"></i>
         </button>
       </form>
     </div>
   </div>
-  <!-- <div class="row">
-    <div
-      class="col-lg-3 col-md-3 col-sm-12 col-xs-12"
-      *ngFor="let subjectEl of subjects"
-    >
-      <div class="subject-container">
-        <h3 class="subject-title">
-          {{ subjectEl.subject }}
-        </h3>
-        <div class="subject-buttons">
+  <nz-table
+    #headerTable
+    style="width: 90%; margin-left: 5%"
+    [nzData]="levels"
+    [nzPageSize]="10"
+    nzScrolly="500px"
+  >
+    <thead>
+      <tr>
+        <th>Level name</th>
+        <th nzWidth="100px"></th>
+        <th nzWidth="100px"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of levels; let i = index">
+        <td class="table-cell" [routerLink]="[data.level]">{{ data.level }}</td>
+        <td class="table-cell edit-level">
           <i
-            (click)="onSubjectEdit(subjectEl.id, subjectEl.subject)"
+            (click)="onLevelEdit(data.id, data.level)"
             nz-icon
             nzType="edit"
-            nzTheme="fill"
+            nzTheme="outline"
           ></i>
-          <i
-            (click)="onSubjectDelete(subjectEl.id)"
-            nz-icon
-            nzType="delete"
-            nzTheme="fill"
-          ></i>
-        </div>
-      </div>
-    </div>
-  </div> -->
+        </td>
+        <td class="table-cell delete-level">
+          <a
+            nz-popconfirm
+            nzPopconfirmTitle="Are you sure delete this item?"
+            (nzOnConfirm)="confirm(data.id)"
+            (nzOnCancel)="cancel()"
+          >
+            <i nz-icon nzType="delete" nzTheme="outline"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
 </div>

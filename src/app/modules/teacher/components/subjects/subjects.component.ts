@@ -63,10 +63,6 @@ export class SubjectsComponent implements OnInit {
     console.log(this.subjectId);
   }
 
-  onSubjectDelete(id: number) {
-    this.confirm(id)
-  }
-
   cancel(): void {
     // this.nzMessageService.info('click cancel');
   }

@@ -40,6 +40,10 @@ export class QuestionsComponent implements OnInit {
     return (this.validateForm.get('wrongAnswers') as FormArray).controls;
   }
 
+  getFormControls() {
+    return (this.validateForm.get('newForm') as FormArray).controls;
+  }
+
   removeField(index: number) {
     (<FormArray>this.validateForm.get('wrongAnswers')).removeAt(index);
   }
@@ -48,6 +52,19 @@ export class QuestionsComponent implements OnInit {
     (<FormArray>this.validateForm.get('wrongAnswers')).push(
       new FormGroup({
         wrongAnswer: new FormControl('', Validators.required),
+      })
+    );
+  }
+
+  addForm() {
+    (<FormArray>this.validateForm.get('newForm')).push(
+      new FormGroup({
+        wrongAnswer: new FormControl('', Validators.required),
+        quesTitle: new FormControl('', [Validators.required]),
+        question: new FormControl('', [Validators.required]),
+        rightAnswer: new FormControl('', [Validators.required]),
+        wrongAnswers: new FormArray([], Validators.required),
+        description: new FormControl(''),
       })
     );
   }
@@ -72,6 +89,7 @@ export class QuestionsComponent implements OnInit {
       rightAnswer: ['', [Validators.required]],
       wrongAnswers: new FormArray([], Validators.required),
       description: [''],
+      // newForm: new FormArray([], Validators.required),
     });
   }
 }

@@ -1,0 +1,35 @@
+.level-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.level-buttons i {
+  margin-right: 0.7rem;
+  cursor: pointer;
+  font-size: large;
+  transition: 0.5s ease;
+}
+
+.level-buttons i:hover {
+  font-size: larger;
+}
+
+
+.table-cell {
+  cursor: pointer;
+}
+
+.edit-level i{
+  color: green;
+  transition: 0.5s ease;
+}
+
+.delete-level i{
+  color: red;
+  transition: 0.3s ease;
+}
+
+.edit-level i:hover, .delete-level i:hover {
+  font-size: larger;
+}

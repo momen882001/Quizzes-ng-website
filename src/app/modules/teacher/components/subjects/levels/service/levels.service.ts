@@ -21,4 +21,32 @@ export class LevelsService {
         }
       );
   }
+
+  getLevels(subjectId: number) {
+    return this.http.get(`/api/subjects/${subjectId}`);
+  }
+
+  updateLevel(id: number, updatedlevel: string) {
+    this.http.put(`/api/subjects/${id}`, updatedlevel).subscribe(
+      (res) => {
+        console.log(res);
+        window.location.reload();
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  deleteLevel(id: number) {
+    this.http.delete(`/api/subjects/${id}`).subscribe(
+      (res) => {
+        console.log(res);
+        window.location.reload();
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
 }

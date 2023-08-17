@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from './signup/user.model';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root',
@@ -15,16 +16,12 @@ export class AuthService {
   ) {}
 
   signUp(signupData: User): void {
-    this.http.post<User>('/api/users', signupData).subscribe(
+    this.http.post<User>(environment.APIUrl + 'Register', signupData).subscribe(
       (resData: User) => {
-        this.message.create( "success", "Signed up successfully" , {
-          nzDuration : 3000
+        this.message.create('success', 'Signed up successfully', {
+          nzDuration: 3000,
         });
-        if (resData.role === 'te') {
-          this.router.navigate(['/teacher']);
-        } else if (resData.role === 'st') {
-          this.router.navigate(['/student']);
-        }
+        this.router.navigate(['/login']);
       },
       (err: any) => {
         console.log(err);
@@ -51,13 +48,9 @@ export class AuthService {
               this.router.navigate(['/student']);
             }
           } else if (userData.email !== loginData.email) {
-            this.message.create(
-              'error',
-              'Your email is incorrect',
-              {
-                nzDuration: 4000,
-              }
-            );
+            this.message.create('error', 'Your email is incorrect', {
+              nzDuration: 4000,
+            });
           } else if (userData.password !== loginData.password) {
             this.message.create('error', 'Your password is incorrect', {
               nzDuration: 4000,

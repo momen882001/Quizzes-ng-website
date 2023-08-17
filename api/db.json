@@ -16,10 +16,38 @@
   "subjects": [
     {
       "subject": "English",
+      "levels": [
+        {
+          "level": "level1",
+          "id": 1
+        },
+        {
+          "level": "level2",
+          "id": 2
+        },
+        {
+          "level": "level3",
+          "id": 3
+        },
+        {
+          "level": "level4",
+          "id": 4
+        }
+      ],
       "id": 2
     },
     {
       "subject": "French",
+      "levels": [
+        {
+          "level": "level1",
+          "id": 1
+        },
+        {
+          "level": "level2",
+          "id": 2
+        }
+      ],
       "id": 3
     },
     {
