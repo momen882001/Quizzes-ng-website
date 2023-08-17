@@ -20,9 +20,9 @@ const teacherRoutes: Routes = [
       { path: 'subjects', component: SubjectsComponent },
       { path: 'subjects/:subjectId', component: LevelsComponent },
       { path: 'subjects/:subjectId/:levelName', component: LevelComponent },
-      { path: 'subjects/:subjectId/:levelName/createQues', component: QuestionsComponent },
       { path: 'subjects/:subjectId/:levelName/createExam', component: CreateExamComponent },
       { path: 'subjects/:subjectId/:levelName/viewQues', component: ViewQuestionsComponent },
+      { path: 'subjects/:subjectId/:levelName/createQues', component: QuestionsComponent },
     ],
   },
 ];

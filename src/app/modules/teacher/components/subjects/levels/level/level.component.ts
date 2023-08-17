@@ -1,4 +1,4 @@
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import {
   FormGroup,
@@ -14,6 +14,7 @@ import {
 })
 export class LevelComponent implements OnInit {
   validateForm!: UntypedFormGroup;
+  levelName! : string
 
   constructor(
     private fb: UntypedFormBuilder,
@@ -26,6 +27,8 @@ export class LevelComponent implements OnInit {
       this.router.navigate(['createQues'], { relativeTo: this.route });
     } else if (value === 'CE') {
       this.router.navigate(['createExam'], { relativeTo: this.route });
+    } else if (value === 'VQ') {
+      this.router.navigate(['viewQues'], { relativeTo: this.route });
     }
   }
 
@@ -33,5 +36,9 @@ export class LevelComponent implements OnInit {
     this.validateForm = this.fb.group({
       mode: ['', Validators.required],
     });
+
+    this.route.params.subscribe((params : Params) => {
+      this.levelName = params['levelName'];
+    })
   }
 }

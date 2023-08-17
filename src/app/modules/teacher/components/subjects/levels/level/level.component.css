@@ -1,0 +1,27 @@
+.level-container {
+  background-color: #fff;
+  padding: 2rem 1rem 2rem 1rem;
+  border-radius: 10px;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 0.5px dashed #002140;
+}
+
+.level-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+
+h2 {
+  color: #002140;
+}
+
+.level-selection {
+  width: 100%;
+  color: #002140;
+}

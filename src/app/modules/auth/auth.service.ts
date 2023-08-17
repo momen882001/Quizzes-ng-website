@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { User } from './signup/user.model';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { environment } from 'src/environments/environment.prod';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,7 @@ export class AuthService {
     private router: Router,
     private message: NzMessageService
   ) {}
+  user = new BehaviorSubject<any>(null);
 
   signUp(signupData: User): void {
     this.http.post<User>(environment.APIUrl + 'Register', signupData).subscribe(
@@ -37,6 +39,7 @@ export class AuthService {
             userData.email === loginData.email &&
             userData.password === loginData.password
           ) {
+            this.user.next(userData);
             this.message.create('success', 'Logined successfully', {
               nzDuration: 4000,
             });
