@@ -79,7 +79,7 @@ export class SignupComponent implements OnInit {
       fullName: ['', [Validators.required]],
       country: ['', [Validators.required]],
       address: ['', [Validators.required]],
-      role: ['', [Validators.required]],
+      role: [null, [Validators.required]],
       phoneNumber: [
         '',
         [Validators.required, Validators.pattern('[0-9]{11}')],

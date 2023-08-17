@@ -213,8 +213,8 @@
               nzPlaceHolder="Select a option and change input text above"
               (ngModelChange)="genderChange($event)"
             >
-              <nz-option nzValue="st" nzLabel="Student"></nz-option>
-              <nz-option nzValue="te" nzLabel="Teacher"></nz-option>
+              <nz-option [nzValue]="1" nzLabel="Student"></nz-option>
+              <nz-option [nzValue]="0" nzLabel="Teacher"></nz-option>
             </nz-select>
           </nz-form-control>
         </nz-form-item>
