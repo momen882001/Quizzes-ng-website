@@ -6,6 +6,6 @@ export interface User {
   confirmPassword: string;
   adderss: string;
   country: string;
-  role: string;
-  phoneNumber: number;
+  role: number;
+  phoneNumber: string;
 }

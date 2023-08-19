@@ -2,11 +2,6 @@
   <div class="row">
     <div class="col-12 questions-column">
       <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
-        <!-- <div formArrayName="newForm"> -->
-        <!-- <div
-            *ngFor="let control of getFormControls(); let i = index"
-            [formGroupName]="'validateForm'"
-          > -->
         <nz-collapse>
           <nz-collapse-panel nzHeader="Test">
             <nz-form-item>
@@ -20,7 +15,7 @@
                 <nz-input-group>
                   <input
                     nz-input
-                    formControlName="quesTitle"
+                    formControlName="title"
                     placeholder="write question title"
                   />
                 </nz-input-group>
@@ -53,29 +48,7 @@
                 </ng-template>
               </nz-form-control>
             </nz-form-item>
-            <nz-form-item>
-              <nz-form-control
-                [nzSpan]="12"
-                nzHasFeedback
-                nzValidatingTip="Validating..."
-                [nzErrorTip]="rightAnswerErrorTpl"
-              >
-                <nz-form-label nzRequired>Right Answer</nz-form-label>
-                <nz-input-group>
-                  <input
-                    nz-input
-                    formControlName="rightAnswer"
-                    placeholder="write your right answer"
-                  />
-                </nz-input-group>
-                <ng-template #rightAnswerErrorTpl let-control>
-                  <ng-container *ngIf="control.hasError('required')"
-                    >Please input your right answer!</ng-container
-                  >
-                </ng-template>
-              </nz-form-control>
-            </nz-form-item>
-            <div formArrayName="wrongAnswers">
+            <div formArrayName="answersList">
               <nz-form-item
                 *ngFor="let control of getControls(); let i = index"
                 [formGroupName]="i"
@@ -85,14 +58,29 @@
                   [nzErrorTip]="wrongAnswersErrorTpl"
                 >
                   <nz-form-label nzRequired
-                    >{{ i + 1 }}.Wrong answer
+                    >{{ i + 1 }}. answer
                   </nz-form-label>
                   <input
                     class="wrong-input"
                     nz-input
                     placeholder="placeholder"
-                    formControlName="wrongAnswer"
+                    formControlName="answer"
                   />
+                  <nz-form-item>
+                    <nz-form-control
+                      nzHasFeedback
+                      [nzSpan]="12"
+                      nzErrorTip="Please select if your answer is true or not!"
+                    >
+                      <nz-select
+                        formControlName="isCorrect"
+                        nzPlaceHolder="Select a option and change input text above"
+                      >
+                        <nz-option [nzValue]="true" nzLabel="True"></nz-option>
+                        <nz-option [nzValue]="false" nzLabel="False"></nz-option>
+                      </nz-select>
+                    </nz-form-control>
+                  </nz-form-item>
                   <i
                     nz-icon
                     nzType="minus-circle-o"
@@ -101,7 +89,7 @@
                   ></i>
                   <ng-template #wrongAnswersErrorTpl let-control>
                     <ng-container *ngIf="control.hasError('required')"
-                      >Please input wrong answer!</ng-container
+                      >Please input your answer!</ng-container
                     >
                   </ng-template>
                 </nz-form-control>
@@ -116,7 +104,7 @@
                   (click)="addField()"
                 >
                   <i nz-icon nzType="plus"></i>
-                  Add wrong answer
+                  Add answer
                 </button>
               </nz-form-control>
             </nz-form-item>
@@ -133,9 +121,6 @@
             </nz-form-item>
           </nz-collapse-panel>
         </nz-collapse>
-
-        <!-- </div> -->
-        <!-- </div> -->
         <nz-form-item>
           <nz-form-control [nzSpan]="12">
             <button nz-button nzType="primary" [disabled]="!validateForm.valid">
@@ -144,19 +129,6 @@
             <button nz-button (click)="resetForm($event)">Reset</button>
           </nz-form-control>
         </nz-form-item>
-        <!-- <nz-form-item>
-          <nz-form-control>
-            <button
-              nz-button
-              nzType="dashed"
-              class="add-button"
-              (click)="addForm()"
-            >
-              <i nz-icon nzType="plus"></i>
-              Add Form
-            </button>
-          </nz-form-control>
-        </nz-form-item> -->
       </form>
     </div>
   </div>

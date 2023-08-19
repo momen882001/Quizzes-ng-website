@@ -2,12 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {
   FormGroup,
   FormControl,
-  ValidationErrors,
   FormBuilder,
   Validators,
   FormArray,
 } from '@angular/forms';
-import { Observable, Observer } from 'rxjs';
 
 @Component({
   selector: 'app-questions',
@@ -18,9 +16,10 @@ export class QuestionsComponent implements OnInit {
   validateForm!: FormGroup;
 
   ngOnInit(): void {
-    (<FormArray>this.validateForm.get('wrongAnswers')).push(
+    (<FormArray>this.validateForm.get('answersList')).push(
       new FormGroup({
-        wrongAnswer: new FormControl('', Validators.required),
+        answer: new FormControl('', Validators.required),
+        isCorrect: new FormControl(null, Validators.required),
       })
     );
   }
@@ -37,37 +36,23 @@ export class QuestionsComponent implements OnInit {
   }
 
   getControls() {
-    return (this.validateForm.get('wrongAnswers') as FormArray).controls;
+    return (this.validateForm.get('answersList') as FormArray).controls;
   }
 
-  getFormControls() {
-    return (this.validateForm.get('newForm') as FormArray).controls;
-  }
 
   removeField(index: number) {
-    (<FormArray>this.validateForm.get('wrongAnswers')).removeAt(index);
+    (<FormArray>this.validateForm.get('answersList')).removeAt(index);
   }
 
   addField() {
-    (<FormArray>this.validateForm.get('wrongAnswers')).push(
+    (<FormArray>this.validateForm.get('answersList')).push(
       new FormGroup({
-        wrongAnswer: new FormControl('', Validators.required),
+        answer: new FormControl('', Validators.required),
+        isCorrect: new FormControl(null, Validators.required),
       })
     );
   }
 
-  addForm() {
-    (<FormArray>this.validateForm.get('newForm')).push(
-      new FormGroup({
-        wrongAnswer: new FormControl('', Validators.required),
-        quesTitle: new FormControl('', [Validators.required]),
-        question: new FormControl('', [Validators.required]),
-        rightAnswer: new FormControl('', [Validators.required]),
-        wrongAnswers: new FormArray([], Validators.required),
-        description: new FormControl(''),
-      })
-    );
-  }
 
   submitForm(): void {
     if (this.validateForm.valid) {
@@ -84,12 +69,32 @@ export class QuestionsComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.validateForm = this.fb.group({
-      quesTitle: ['', [Validators.required]],
+      title: ['', [Validators.required]],
       question: ['', [Validators.required]],
-      rightAnswer: ['', [Validators.required]],
-      wrongAnswers: new FormArray([], Validators.required),
+      isCorrect: [null, [Validators.required]],
+      answersList: new FormArray([], Validators.required),
       description: [''],
       // newForm: new FormArray([], Validators.required),
     });
   }
+
+
+  // Add question in the same component
+
+  // getFormControls() {
+  //   return (this.validateForm.get('newForm') as FormArray).controls;
+  // }
+
+  // addForm() {
+  //   (<FormArray>this.validateForm.get('newForm')).push(
+  //     new FormGroup({
+  //       wrongAnswer: new FormControl('', Validators.required),
+  //       quesTitle: new FormControl('', [Validators.required]),
+  //       question: new FormControl('', [Validators.required]),
+  //       rightAnswer: new FormControl('', [Validators.required]),
+  //       wrongAnswers: new FormArray([], Validators.required),
+  //       description: new FormControl(''),
+  //     })
+  //   );
+  // }
 }

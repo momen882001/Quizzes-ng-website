@@ -12,9 +12,10 @@ export class HeaderComponent implements OnInit {
   isLogined : boolean = false
 
   ngOnInit(): void {
-    this.authService.user.subscribe(user => {
-      this.isLogined = user ? true : false;
+    this.authService.user.subscribe(token => {
+      this.isLogined = !token || localStorage.getItem('accessToken') === undefined  ? false : true;
     })
+    this.authService.autoLogin();
   }
 
   onNavigateSignUp() {
@@ -23,6 +24,11 @@ export class HeaderComponent implements OnInit {
 
   onLogout() {
     this.authService.user.next(null)
+    this.authService.user.subscribe( token => {
+      if (!token) {
+        localStorage.removeItem('accessToken')
+      }
+    })
     this.router.navigate(['/login']);
   }
 

@@ -19,7 +19,7 @@ export class AuthService {
 
   signUp(signupData: User): void {
     this.http.post<User>(environment.APIUrl + 'Register', signupData).subscribe(
-      (resData: User) => {
+      (resData: any) => {
         this.message.create('success', 'Signed up successfully', {
           nzDuration: 3000,
         });
@@ -60,6 +60,16 @@ export class AuthService {
       );
   }
 
+  autoLogin() {
+    const userToken = localStorage.getItem('accessToken');
+    if (!userToken) {
+      return;
+    }else {
+      console.log(userToken);
+    this.user.next(userToken);
+    this.router.navigate(['/teacher']);
+    }
+  }
 
   // using fake API
 
