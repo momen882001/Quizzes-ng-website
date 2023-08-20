@@ -1,6 +1,7 @@
 import {
   HttpEvent,
   HttpHandler,
+  HttpHeaders,
   HttpInterceptor,
   HttpParams,
   HttpRequest,
@@ -23,9 +24,9 @@ export class AuthInterceptonService implements HttpInterceptor {
           return next.handle(req);
         }
         const modifiedReq = req.clone({
-          params: new HttpParams().set(
-            'token',
-            JSON.stringify(localStorage.getItem('accessToken'))
+          headers: new HttpHeaders().set(
+            'Authorization',
+            `Bearer ${localStorage.getItem('accessToken')}`
           ),
         });
         return next.handle(modifiedReq);

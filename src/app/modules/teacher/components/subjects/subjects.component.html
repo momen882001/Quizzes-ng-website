@@ -27,7 +27,7 @@
               <input
                 type="text"
                 nz-input
-                formControlName="subject"
+                formControlName="name"
                 placeholder="Input your subject name!"
               />
             </nz-input-group>
@@ -56,11 +56,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let data of subjects">
-        <td class="table-cell" [routerLink]="[data.id]">{{ data.subject }}</td>
+      <tr *ngFor="let subjectEl of subjects">
+        <td class="table-cell" [routerLink]="[subjectEl.id]">{{ subjectEl.name }}</td>
         <td class="table-cell edit-subject">
           <i
-            (click)="onSubjectEdit(data.id, data.subject)"
+            (click)="onSubjectEdit(subjectEl.id, subjectEl.name)"
             nz-icon
             nzType="edit"
             nzTheme="outline"
@@ -70,7 +70,7 @@
           <a
             nz-popconfirm
             nzPopconfirmTitle="Are you sure delete this item?"
-            (nzOnConfirm)="confirm(data.id)"
+            (nzOnConfirm)="confirm(subjectEl.id)"
             (nzOnCancel)="cancel()"
           >
             <i

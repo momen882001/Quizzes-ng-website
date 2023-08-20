@@ -8,13 +8,14 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private router: Router, private authService : AuthService) {}
-  isLogined : boolean = false
+  constructor(private router: Router, private authService: AuthService) {}
+  isLogined: boolean = false;
 
   ngOnInit(): void {
-    this.authService.user.subscribe(token => {
-      this.isLogined = !token || localStorage.getItem('accessToken') === undefined  ? false : true;
-    })
+    this.authService.user.subscribe((token) => {
+      this.isLogined =
+        !token || localStorage.getItem('accessToken') === null ? false : true;
+    });
     this.authService.autoLogin();
   }
 
@@ -23,12 +24,13 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogout() {
-    this.authService.user.next(null)
-    this.authService.user.subscribe( token => {
-      if (!token) {
-        localStorage.removeItem('accessToken')
-      }
-    })
+    this.authService.user.next(null);
+    // this.authService.user.subscribe( token => {
+    //   if (!token) {
+    //     localStorage.removeItem('accessToken')
+    //   }
+    // })
+    localStorage.removeItem('accessToken');
     this.router.navigate(['/login']);
   }
 

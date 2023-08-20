@@ -21,7 +21,7 @@
               <input
                 type="text"
                 nz-input
-                formControlName="levelName"
+                formControlName="name"
                 placeholder="Input your level name!"
               />
             </nz-input-group>
@@ -49,11 +49,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let data of levels; let i = index">
-        <td class="table-cell" [routerLink]="[data.level]">{{ data.level }}</td>
+      <tr *ngFor="let level of levels; let i = index">
+        <td class="table-cell" [routerLink]="[level.id]">{{ level.name }}</td>
         <td class="table-cell edit-level">
           <i
-            (click)="onLevelEdit(data.id, data.level)"
+            (click)="onLevelEdit(level.id, level.name)"
             nz-icon
             nzType="edit"
             nzTheme="outline"
@@ -63,7 +63,7 @@
           <a
             nz-popconfirm
             nzPopconfirmTitle="Are you sure delete this item?"
-            (nzOnConfirm)="confirm(data.id)"
+            (nzOnConfirm)="confirm(level.id)"
             (nzOnCancel)="cancel()"
           >
             <i nz-icon nzType="delete" nzTheme="outline"></i>

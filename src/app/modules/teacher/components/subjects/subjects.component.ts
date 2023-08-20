@@ -15,10 +15,9 @@ import { SubjectsService } from './service/subjects.service';
 export class SubjectsComponent implements OnInit {
   validateForm!: UntypedFormGroup;
   createSubjectFlag: boolean = false;
-  subjects!: any[];
+  subjects!: { id: string; name: string }[];
   editMode: boolean = false;
-  subjectId!: number;
-  nzMessageService: any;
+  subjectId!: string;
 
   constructor(
     private fb: UntypedFormBuilder,
@@ -28,10 +27,10 @@ export class SubjectsComponent implements OnInit {
   submitForm(): void {
     if (this.validateForm.valid) {
       if (this.editMode) {
-        console.log(this.validateForm.value);
+        const updatedSubjectName = this.validateForm.value.name
         this.subjectsService.updateSubject(
           this.subjectId,
-          this.validateForm.value
+          updatedSubjectName
         );
         this.editMode = false;
       } else {
@@ -53,11 +52,11 @@ export class SubjectsComponent implements OnInit {
     this.createSubjectFlag = true;
   }
 
-  onSubjectEdit(id: number, subjectName: string) {
+  onSubjectEdit(id: string, subjectName: string) {
     this.createSubjectFlag = true;
     this.editMode = true;
     this.validateForm.setValue({
-      subject: subjectName,
+      name: subjectName,
     });
     this.subjectId = id;
     console.log(this.subjectId);
@@ -67,13 +66,13 @@ export class SubjectsComponent implements OnInit {
     // this.nzMessageService.info('click cancel');
   }
 
-  confirm(id : number): void {
+  confirm(id: string): void {
     this.subjectsService.deleteSubject(id);
   }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      subject: ['', Validators.required],
+      name: ['', Validators.required],
     });
     this.loadSubjects();
   }
@@ -81,8 +80,8 @@ export class SubjectsComponent implements OnInit {
   private loadSubjects() {
     this.subjectsService.getSubjects().subscribe(
       (res: any) => {
-        console.log(res);
-        this.subjects = res;
+        console.log(res.data);
+        this.subjects = res.data;
       },
       (err: any) => {
         console.log(err);
