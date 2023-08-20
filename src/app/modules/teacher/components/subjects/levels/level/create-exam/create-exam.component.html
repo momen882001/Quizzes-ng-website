@@ -21,7 +21,7 @@
               <input
                 type="text"
                 nz-input
-                formControlName="examTitle"
+                formControlName="title"
                 placeholder="write your exam title"
               />
             </nz-input-group>
@@ -38,7 +38,7 @@
               <input
                 nz-input
                 type="number"
-                formControlName="questionNumber"
+                formControlName="questionCount"
                 placeholder="Write Number of questions"
               />
             </nz-input-group>
@@ -58,15 +58,8 @@
             nzValidatingTip="Validating..."
             [nzErrorTip]="timeError"
           >
-            <nz-form-label nzRequired>Time in minutes</nz-form-label>
-            <nz-input-group>
-              <input
-                nz-input
-                type="number"
-                formControlName="time"
-                placeholder="Write exam time in minutes"
-              />
-            </nz-input-group>
+            <nz-form-label nzRequired>Time</nz-form-label>
+              <nz-time-picker formControlName="duration" (ngModelChange)="log($event)"></nz-time-picker>
             <ng-template #timeError let-control>
               <ng-container *ngIf="control.hasError('required')"
                 >Please input time of exam!</ng-container

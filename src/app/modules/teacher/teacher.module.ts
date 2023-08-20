@@ -15,6 +15,6 @@ import { ViewQuestionsComponent } from './components/subjects/levels/level/view-
 
 @NgModule({
   declarations: [TeacherComponent,ResultsComponent, SubjectsComponent, ProfileComponent, LevelsComponent, QuestionsComponent, LevelComponent, CreateExamComponent, ViewQuestionsComponent],
-  imports: [CommonModule, TeacherRoutingModule, SharedModule,ReactiveFormsModule],
+  imports: [CommonModule, TeacherRoutingModule, SharedModule,ReactiveFormsModule, FormsModule],
 })
 export class TeacherModule {}

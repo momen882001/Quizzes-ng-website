@@ -60,7 +60,7 @@ export class LevelsComponent implements OnInit {
     this.createLevelFlag = true;
     this.editMode = true;
     this.validateForm.setValue({
-      levelName: levelName,
+      name: levelName,
     });
     this.levelId = id;
     console.log(this.levelId);
