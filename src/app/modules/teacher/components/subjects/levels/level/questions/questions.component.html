@@ -2,125 +2,139 @@
   <div class="row">
     <div class="col-12 questions-column">
       <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
-        <nz-collapse>
-          <nz-collapse-panel nzHeader="Test">
+        <!-- <nz-collapse>
+          <nz-collapse-panel nzHeader="Test"> -->
+        <nz-form-item>
+          <nz-form-control
+            [nzSpan]="12"
+            nzHasFeedback
+            nzValidatingTip="Validating..."
+            [nzErrorTip]="titleErrorTpl"
+          >
+            <nz-form-label nzRequired>Q.Title</nz-form-label>
+            <nz-input-group>
+              <input
+                nz-input
+                formControlName="title"
+                placeholder="write question title"
+              />
+            </nz-input-group>
+            <ng-template #titleErrorTpl let-control>
+              <ng-container *ngIf="control.hasError('required')"
+                >Please input question title!</ng-container
+              >
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control
+            [nzSpan]="12"
+            nzHasFeedback
+            nzValidatingTip="Validating..."
+            [nzErrorTip]="quesErrorTpl"
+          >
+            <nz-form-label nzRequired>Question</nz-form-label>
+            <nz-input-group>
+              <input
+                nz-input
+                formControlName="questions"
+                placeholder="write your question"
+              />
+            </nz-input-group>
+            <ng-template #quesErrorTpl let-control>
+              <ng-container *ngIf="control.hasError('required')"
+                >Please input your question!</ng-container
+              >
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <div formArrayName="answersList">
+          <nz-form-item
+            *ngFor="let control of getControls(); let i = index"
+            [formGroupName]="i"
+          >
+            <nz-form-control
+              nzValidatingTip="Validating..."
+              [nzErrorTip]="wrongAnswersErrorTpl"
+            >
+              <nz-form-label nzRequired>{{ i + 1 }}. answer </nz-form-label>
+              <input
+                class="wrong-input"
+                nz-input
+                placeholder="placeholder"
+                formControlName="answer"
+              />
+              <i
+                nz-icon
+                nzType="minus-circle-o"
+                class="dynamic-delete-button"
+                (click)="removeField(i)"
+              ></i>
+              <ng-template #wrongAnswersErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')"
+                  >Please input your answer!</ng-container
+                >
+              </ng-template>
+            </nz-form-control>
             <nz-form-item>
               <nz-form-control
-                [nzSpan]="12"
                 nzHasFeedback
-                nzValidatingTip="Validating..."
-                [nzErrorTip]="titleErrorTpl"
-              >
-                <nz-form-label nzRequired>Q.Title</nz-form-label>
-                <nz-input-group>
-                  <input
-                    nz-input
-                    formControlName="title"
-                    placeholder="write question title"
-                  />
-                </nz-input-group>
-                <ng-template #titleErrorTpl let-control>
-                  <ng-container *ngIf="control.hasError('required')"
-                    >Please input question title!</ng-container
-                  >
-                </ng-template>
-              </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-              <nz-form-control
                 [nzSpan]="12"
-                nzHasFeedback
-                nzValidatingTip="Validating..."
-                [nzErrorTip]="quesErrorTpl"
+                nzErrorTip="Please select if your answer is true or not!"
               >
-                <nz-form-label nzRequired>Question</nz-form-label>
-                <nz-input-group>
-                  <input
-                    nz-input
-                    formControlName="question"
-                    placeholder="write your question"
-                  />
-                </nz-input-group>
-                <ng-template #quesErrorTpl let-control>
-                  <ng-container *ngIf="control.hasError('required')"
-                    >Please input your question!</ng-container
-                  >
-                </ng-template>
-              </nz-form-control>
-            </nz-form-item>
-            <div formArrayName="answersList">
-              <nz-form-item
-                *ngFor="let control of getControls(); let i = index"
-                [formGroupName]="i"
-              >
-                <nz-form-control
-                  nzValidatingTip="Validating..."
-                  [nzErrorTip]="wrongAnswersErrorTpl"
+                <nz-select
+                  formControlName="isCorrect"
+                  nzPlaceHolder="Select a option and change input text above"
                 >
-                  <nz-form-label nzRequired
-                    >{{ i + 1 }}. answer
-                  </nz-form-label>
-                  <input
-                    class="wrong-input"
-                    nz-input
-                    placeholder="placeholder"
-                    formControlName="answer"
-                  />
-                  <nz-form-item>
-                    <nz-form-control
-                      nzHasFeedback
-                      [nzSpan]="12"
-                      nzErrorTip="Please select if your answer is true or not!"
-                    >
-                      <nz-select
-                        formControlName="isCorrect"
-                        nzPlaceHolder="Select a option and change input text above"
-                      >
-                        <nz-option [nzValue]="true" nzLabel="True"></nz-option>
-                        <nz-option [nzValue]="false" nzLabel="False"></nz-option>
-                      </nz-select>
-                    </nz-form-control>
-                  </nz-form-item>
-                  <i
-                    nz-icon
-                    nzType="minus-circle-o"
-                    class="dynamic-delete-button"
-                    (click)="removeField(i)"
-                  ></i>
-                  <ng-template #wrongAnswersErrorTpl let-control>
-                    <ng-container *ngIf="control.hasError('required')"
-                      >Please input your answer!</ng-container
-                    >
-                  </ng-template>
-                </nz-form-control>
-              </nz-form-item>
-            </div>
-            <nz-form-item>
-              <nz-form-control>
-                <button
-                  nz-button
-                  nzType="dashed"
-                  class="add-button"
-                  (click)="addField()"
-                >
-                  <i nz-icon nzType="plus"></i>
-                  Add answer
-                </button>
+                  <nz-option [nzValue]="true" nzLabel="True"></nz-option>
+                  <nz-option [nzValue]="false" nzLabel="False"></nz-option>
+                </nz-select>
               </nz-form-control>
             </nz-form-item>
-            <nz-form-item>
-              <nz-form-control nzHasFeedback>
-                <nz-form-label [nzSpan]="7">Q.Description</nz-form-label>
-                <textarea
-                  formControlName="description"
-                  nz-input
-                  rows="2"
-                  placeholder="write any description"
-                ></textarea>
-              </nz-form-control>
-            </nz-form-item>
-          </nz-collapse-panel>
-        </nz-collapse>
+          </nz-form-item>
+        </div>
+        <nz-form-item>
+          <nz-form-control>
+            <button
+              nz-button
+              nzType="dashed"
+              class="add-button"
+              (click)="addField()"
+            >
+              <i nz-icon nzType="plus"></i>
+              Add answer
+            </button>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control
+            nzHasFeedback
+            [nzSpan]="12"
+            nzErrorTip="Please select skill name!"
+          >
+            <nz-select
+              formControlName="skillName"
+              nzPlaceHolder="Select a option and change input text above"
+            >
+              <nz-option [nzValue]="2" nzLabel="Hard"></nz-option>
+              <nz-option [nzValue]="1" nzLabel="Medium"></nz-option>
+              <nz-option [nzValue]="0" nzLabel="Easy"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzHasFeedback>
+            <nz-form-label [nzSpan]="7">Q.Description</nz-form-label>
+            <textarea
+              formControlName="description"
+              nz-input
+              rows="2"
+              placeholder="write any description"
+            ></textarea>
+          </nz-form-control>
+        </nz-form-item>
+        <!-- </nz-collapse-panel>
+        </nz-collapse> -->
         <nz-form-item>
           <nz-form-control [nzSpan]="12">
             <button nz-button nzType="primary" [disabled]="!validateForm.valid">

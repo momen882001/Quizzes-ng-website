@@ -1,3 +1,4 @@
+import { CreateQuestionService } from './service/create-questions.service';
 import { Component, OnInit } from '@angular/core';
 import {
   FormGroup,
@@ -6,6 +7,7 @@ import {
   Validators,
   FormArray,
 } from '@angular/forms';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-questions',
@@ -14,14 +16,34 @@ import {
 })
 export class QuestionsComponent implements OnInit {
   validateForm!: FormGroup;
+  levelId!: string;
+
+  constructor(
+    private fb: FormBuilder,
+    private questionService: CreateQuestionService,
+    private route: ActivatedRoute
+  ) {
+    this.validateForm = this.fb.group({
+      title: ['', [Validators.required]],
+      questions: ['', [Validators.required]],
+      isCorrect: [null],
+      skillName: ['', [Validators.required]],
+      answersList: new FormArray([]),
+      description: [''],
+      // newForm: new FormArray([], Validators.required),
+    });
+  }
 
   ngOnInit(): void {
     (<FormArray>this.validateForm.get('answersList')).push(
       new FormGroup({
         answer: new FormControl('', Validators.required),
-        isCorrect: new FormControl(null, Validators.required),
+        isCorrect: new FormControl(null),
       })
     );
+    this.route.params.subscribe((params: Params) => {
+      this.levelId = params['levelId'];
+    });
   }
 
   resetForm(e: MouseEvent): void {
@@ -39,7 +61,6 @@ export class QuestionsComponent implements OnInit {
     return (this.validateForm.get('answersList') as FormArray).controls;
   }
 
-
   removeField(index: number) {
     (<FormArray>this.validateForm.get('answersList')).removeAt(index);
   }
@@ -48,15 +69,26 @@ export class QuestionsComponent implements OnInit {
     (<FormArray>this.validateForm.get('answersList')).push(
       new FormGroup({
         answer: new FormControl('', Validators.required),
-        isCorrect: new FormControl(null, Validators.required),
+        isCorrect: new FormControl(null),
       })
     );
   }
 
-
   submitForm(): void {
     if (this.validateForm.valid) {
-      console.log('submit', this.validateForm.value);
+      const title = this.validateForm.value.title;
+      const description = this.validateForm.value.description;
+      const questions = this.validateForm.value.questions;
+      const skillName = this.validateForm.value.skillName;
+      const answersList = this.validateForm.value.answersList;
+      this.questionService.createQuestion(
+        title,
+        description,
+        questions,
+        skillName,
+        this.levelId,
+        answersList,
+      );
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {
@@ -66,18 +98,6 @@ export class QuestionsComponent implements OnInit {
       });
     }
   }
-
-  constructor(private fb: FormBuilder) {
-    this.validateForm = this.fb.group({
-      title: ['', [Validators.required]],
-      question: ['', [Validators.required]],
-      isCorrect: [null, [Validators.required]],
-      answersList: new FormArray([], Validators.required),
-      description: [''],
-      // newForm: new FormArray([], Validators.required),
-    });
-  }
-
 
   // Add question in the same component
 

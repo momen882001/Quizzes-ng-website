@@ -27,7 +27,9 @@ export class CreateExamComponent implements OnInit {
     if (this.validateForm.valid) {
       const title = this.validateForm.value.title;
       const questionCount = this.validateForm.value.questionCount;
-      const duration = this.validateForm.value.duration.toString().split(' ')[4];
+      const duration = this.validateForm.value.duration
+        .toString()
+        .split(' ')[4];
       this.createExamService
         .onCreateExam(title, questionCount, duration, this.levelId)
         .subscribe(
