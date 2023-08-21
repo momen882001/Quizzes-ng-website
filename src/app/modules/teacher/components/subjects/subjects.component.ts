@@ -27,14 +27,29 @@ export class SubjectsComponent implements OnInit {
   submitForm(): void {
     if (this.validateForm.valid) {
       if (this.editMode) {
-        const updatedSubjectName = this.validateForm.value.name
-        this.subjectsService.updateSubject(
-          this.subjectId,
-          updatedSubjectName
-        );
+        const updatedSubjectName = this.validateForm.value.name;
+        this.subjectsService
+          .updateSubject(this.subjectId, updatedSubjectName)
+          .subscribe(
+            (res) => {
+              console.log(res);
+              this.loadSubjects();
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
         this.editMode = false;
       } else {
-        this.subjectsService.addSubject(this.validateForm.value);
+        this.subjectsService.addSubject(this.validateForm.value).subscribe(
+          (res: any) => {
+            console.log(res);
+            this.loadSubjects();
+          },
+          (err: any) => {
+            console.log(err);
+          }
+        );
       }
       this.validateForm.reset();
       this.createSubjectFlag = false;
@@ -67,7 +82,18 @@ export class SubjectsComponent implements OnInit {
   }
 
   confirm(id: string): void {
-    this.subjectsService.deleteSubject(id);
+    this.subjectsService.deleteSubject(id).subscribe(
+      (res) => {
+        console.log(res);
+        this.loadSubjects();
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+    this.validateForm.reset();
+    this.createSubjectFlag = false;
+    this.editMode = false;
   }
 
   ngOnInit(): void {

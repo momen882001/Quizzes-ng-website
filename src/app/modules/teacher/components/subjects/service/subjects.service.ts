@@ -9,15 +9,7 @@ export class SubjectsService {
   constructor(private http: HttpClient) {}
 
   addSubject(subject: string) {
-    this.http.post(environment.APIUrl + 'CreateSubject', subject).subscribe(
-      (res: any) => {
-        console.log(res);
-        window.location.reload();
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    );
+    return this.http.post(environment.APIUrl + 'CreateSubject', subject);
   }
 
   getSubjects() {
@@ -25,35 +17,15 @@ export class SubjectsService {
   }
 
   updateSubject(id: string, updatedsubject: string) {
-    this.http
-      .put(environment.APIUrl + 'EditSubject', {
-        id: id,
-        name: updatedsubject,
-      })
-      .subscribe(
-        (res) => {
-          console.log(res);
-          window.location.reload();
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+    return this.http.put(environment.APIUrl + 'EditSubject', {
+      id: id,
+      name: updatedsubject,
+    });
   }
 
   deleteSubject(id: string) {
-    this.http
-      .delete(environment.APIUrl + 'DeleteSubject', {
-        params: new HttpParams().set('id', id),
-      })
-      .subscribe(
-        (res) => {
-          console.log(res);
-          window.location.reload();
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+    return this.http.delete(environment.APIUrl + 'DeleteSubject', {
+      params: new HttpParams().set('id', id),
+    });
   }
 }

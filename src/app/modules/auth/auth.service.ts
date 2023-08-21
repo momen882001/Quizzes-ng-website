@@ -61,14 +61,13 @@ export class AuthService {
   }
 
   autoLogin() {
-    const userToken = localStorage.getItem('accessToken');
+    let userToken = localStorage.getItem('accessToken');
     if (userToken === null) {
       this.user.next(null);
-      this.router.navigate(['/login']);
-    }else {
       console.log(userToken);
-    this.user.next(userToken);
-    this.router.navigate(['/teacher']);
+    } else {
+      console.log(userToken);
+      this.user.next(userToken);
     }
   }
 

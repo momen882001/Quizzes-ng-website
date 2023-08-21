@@ -4,7 +4,6 @@ import {
   UntypedFormBuilder,
   Validators,
 } from '@angular/forms';
-import { AuthService } from 'src/app/modules/auth/auth.service';
 import { CreateExamService } from './service/create-exam.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 

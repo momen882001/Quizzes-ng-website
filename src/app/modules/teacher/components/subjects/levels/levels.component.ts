@@ -16,7 +16,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 export class LevelsComponent implements OnInit {
   validateForm!: UntypedFormGroup;
   createLevelFlag: boolean = false;
-  levels!: {id : string, name : string}[];
+  levels!: { id: string; name: string }[];
   editMode: boolean = false;
   levelId!: string;
   subjectId!: string;
@@ -40,15 +40,30 @@ export class LevelsComponent implements OnInit {
   submitForm(): void {
     if (this.validateForm.valid) {
       if (this.editMode) {
-        const updatedLevelName = this.validateForm.value.name
-        this.levelsService.updateLevel(
-          this.levelId,
-          updatedLevelName
-        );
+        const updatedLevelName = this.validateForm.value.name;
+        this.levelsService
+          .updateLevel(this.levelId, updatedLevelName)
+          .subscribe(
+            (res) => {
+              console.log(res);
+              this.loadLevels();
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
         this.editMode = false;
       } else {
-        const levelName = this.validateForm.value.name
-        this.levelsService.addLevel(this.subjectId, levelName);
+        const levelName = this.validateForm.value.name;
+        this.levelsService.addLevel(this.subjectId, levelName).subscribe(
+          (res) => {
+            console.log(res);
+            this.loadLevels();
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
       }
       this.validateForm.reset();
       this.createLevelFlag = false;
@@ -81,7 +96,18 @@ export class LevelsComponent implements OnInit {
   }
 
   confirm(id: string): void {
-    this.levelsService.deleteLevel(id);
+    this.levelsService.deleteLevel(id).subscribe(
+      (res) => {
+        console.log(res);
+        this.loadLevels();
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+    this.validateForm.reset();
+    this.createLevelFlag = false;
+    this.editMode = false;
   }
 
   ngOnInit(): void {
@@ -91,16 +117,19 @@ export class LevelsComponent implements OnInit {
 
     this.route.params.subscribe((params: Params) => {
       this.subjectId = params['subjectId'];
-      console.log(this.subjectId);
-      this.levelsService.getLevels(this.subjectId).subscribe(
-        (res: any) => {
-          console.log(res.data);
-          this.levels = res.data;
-        },
-        (err: any) => {
-          console.log(err);
-        }
-      );
+      this.loadLevels();
     });
+  }
+
+  private loadLevels() {
+    this.levelsService.getLevels(this.subjectId).subscribe(
+      (res: any) => {
+        console.log(res.data);
+        this.levels = res.data;
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
   }
 }
