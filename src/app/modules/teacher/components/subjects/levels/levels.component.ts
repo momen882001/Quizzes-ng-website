@@ -21,6 +21,16 @@ export class LevelsComponent implements OnInit {
   levelId!: string;
   subjectId!: string;
 
+  visible: boolean = false;
+
+  clickMe(): void {
+    this.visible = false;
+  }
+
+  change(value: boolean): void {
+    console.log(value);
+  }
+
   constructor(
     private fb: UntypedFormBuilder,
     private levelsService: LevelsService,

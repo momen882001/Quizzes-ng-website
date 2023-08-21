@@ -50,7 +50,25 @@
     </thead>
     <tbody>
       <tr *ngFor="let level of levels; let i = index">
-        <td class="table-cell" [routerLink]="[level.id]">{{ level.name }}</td>
+        <td
+          nz-popover
+          nzPopoverTitle="Choose where you want to go!"
+          [(nzPopoverVisible)]="visible"
+          (nzPopoverVisibleChange)="change($event)"
+          nzPopoverTrigger="click"
+          [nzPopoverContent]="contentTemplate"
+          class="table-cell"
+        >
+          {{ level.name }}
+        </td>
+        <ng-template #contentTemplate>
+          <a [routerLink]="[level.id, 'createQues']">Create Questions</a>
+          <br />
+          <a [routerLink]="[level.id, 'createExam']">Create Exams</a>
+          <br />
+          <a [routerLink]="[level.id, 'viewQues']">View Questions</a>
+          <!-- <a (click)="clickMe()">Close</a> -->
+        </ng-template>
         <td class="table-cell edit-level">
           <i
             (click)="onLevelEdit(level.id, level.name)"
