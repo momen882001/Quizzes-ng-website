@@ -29,7 +29,7 @@ export class QuestionsComponent implements OnInit {
       isCorrect: [null],
       skillName: ['', [Validators.required]],
       answersList: new FormArray([]),
-      description: [''],
+      description: ['',[Validators.required]],
       // newForm: new FormArray([], Validators.required),
     });
   }
@@ -89,6 +89,7 @@ export class QuestionsComponent implements OnInit {
         this.levelId,
         answersList,
       );
+      this.validateForm.reset();
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {

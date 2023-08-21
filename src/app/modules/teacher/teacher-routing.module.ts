@@ -19,7 +19,6 @@ const teacherRoutes: Routes = [
       { path: 'results', component: ResultsComponent },
       { path: 'subjects', component: SubjectsComponent },
       { path: 'subjects/:subjectId', component: LevelsComponent },
-      { path: 'subjects/:subjectId/:levelId', component: LevelComponent },
       { path: 'subjects/:subjectId/:levelId/createExam', component: CreateExamComponent },
       { path: 'subjects/:subjectId/:levelId/viewQues', component: ViewQuestionsComponent },
       { path: 'subjects/:subjectId/:levelId/createQues', component: QuestionsComponent },

@@ -2,6 +2,10 @@
   width: 100%;
 }
 
+.questions-container {
+  padding: 0.5rem 2rem 0.5rem 2rem;
+}
+
 .questions-column {
   display: flex;
   justify-content: center;
@@ -27,5 +31,15 @@
 }
 
 .add-button {
-  width: 60%;
+  width: 35%;
 }
+
+.addAnswer-item {
+  text-align: center;
+}
+
+button {
+  margin-right: 1rem;
+}
+
+

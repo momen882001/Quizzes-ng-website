@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment.prod';
   providedIn: 'root',
 })
 export class CreateQuestionService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router :Router) {}
 
   createQuestion(
     title: string,
@@ -29,6 +29,7 @@ export class CreateQuestionService {
       .subscribe(
         (resData: any) => {
           console.log(resData);
+          this.router.navigate(['/teacher/subjects'])
         },
         (err: any) => {
           console.log(err);

@@ -30,3 +30,23 @@
   border: 0.7px dashed #1890ff;
   margin: 1rem 20% 1rem 20%;
 }
+
+
+.time-input {
+  width: 100%;
+}
+
+.back-link {
+  display: flex;
+  align-items: center;
+  color: #002140;
+}
+
+.back-link i {
+  font-size: larger;
+}
+
+.back-link span {
+  color: #002140;
+  font-weight: 600;
+}

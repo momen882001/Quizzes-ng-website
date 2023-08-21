@@ -57,17 +57,20 @@
           (nzPopoverVisibleChange)="change($event)"
           nzPopoverTrigger="click"
           [nzPopoverContent]="contentTemplate"
+          nzPopoverPlacement="right"
           class="table-cell"
         >
           {{ level.name }}
         </td>
         <ng-template #contentTemplate>
           <a [routerLink]="[level.id, 'createQues']">Create Questions</a>
-          <br />
+          <hr />
           <a [routerLink]="[level.id, 'createExam']">Create Exams</a>
-          <br />
+          <hr />
           <a [routerLink]="[level.id, 'viewQues']">View Questions</a>
-          <!-- <a (click)="clickMe()">Close</a> -->
+          <br>
+          <br>
+          <a style="color: darkred;" (click)="clickMe()">Close</a>
         </ng-template>
         <td class="table-cell edit-level">
           <i

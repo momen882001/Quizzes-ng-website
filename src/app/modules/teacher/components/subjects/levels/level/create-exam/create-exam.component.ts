@@ -16,6 +16,10 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 export class CreateExamComponent implements OnInit {
   validateForm!: UntypedFormGroup;
   levelId!: string;
+  alertToggle : boolean = false;
+  examLink! : string
+
+
   constructor(
     private fb: UntypedFormBuilder,
     private createExamService: CreateExamService,
@@ -34,12 +38,14 @@ export class CreateExamComponent implements OnInit {
         .onCreateExam(title, questionCount, duration, this.levelId)
         .subscribe(
           (resData: any) => {
-            console.log(resData.data);
+            this.examLink = resData.data
+            this.alertToggle = true;
           },
           (err) => {
             console.log(err);
           }
         );
+        this.validateForm.reset()
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {
@@ -50,11 +56,8 @@ export class CreateExamComponent implements OnInit {
     }
   }
 
-  log(time: Date): void {
-    console.log(time && time.toTimeString());
-  }
-
   ngOnInit(): void {
+    this.alertToggle = false;
     this.validateForm = this.fb.group({
       title: [null, [Validators.required]],
       questionCount: [
