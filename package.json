@@ -25,7 +25,7 @@
     "bootstrap": "^5.3.1",
     "json-server": "^0.17.3",
     "ng-zorro-antd": "^15.0.1",
-    "ngx-spinner": "^16.0.2",
+    "ngx-spinner": "^15.0.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "xng-breadcrumb": "^6.3.0",

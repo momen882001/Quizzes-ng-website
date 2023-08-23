@@ -101,7 +101,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/ngx-spinner/animations/ball-spin-clockwise-fade.css"
             ],
             "scripts": []
           }

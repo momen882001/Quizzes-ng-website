@@ -11,7 +11,9 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { AuthInterceptonService } from './modules/auth/auth-interceptor.service';
+import { SpinnerInterceptor } from './core/shared/services/spinner.service';
 
 registerLocaleData(en);
 
@@ -24,9 +26,8 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule,
     SharedModule,
-    // BrowserAnimationsModule,
-    // NgxSpinnerModule,
-    // NgxSpinnerModule.forRoot({ type: 'ball-spin-clockwise-fade' }),
+    NgxSpinnerModule,
+    NgxSpinnerModule.forRoot({ type: 'square-jelly-box' }),
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
@@ -35,6 +36,7 @@ registerLocaleData(en);
       useClass: AuthInterceptonService,
       multi: true,
     },
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
