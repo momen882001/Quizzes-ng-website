@@ -18,19 +18,15 @@ export class AuthInterceptonService implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    return this.authService.user.pipe(
-      exhaustMap((user) => {
-        if (!user) {
-          return next.handle(req);
-        }
-        const modifiedReq = req.clone({
-          headers: new HttpHeaders().set(
-            'Authorization',
-            `Bearer ${localStorage.getItem('accessToken')}`
-          ),
-        });
-        return next.handle(modifiedReq);
-      })
-    );
+    if (localStorage.getItem('accessToken') === null) {
+      return next.handle(req);
+    }
+    const modifiedReq = req.clone({
+      headers: new HttpHeaders().set(
+        'Authorization',
+        `Bearer ${localStorage.getItem('accessToken')}`
+      ),
+    });
+    return next.handle(modifiedReq);
   }
 }

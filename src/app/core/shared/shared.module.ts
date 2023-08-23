@@ -76,10 +76,12 @@ import { NzAffixModule } from 'ng-zorro-antd/affix';
     HeaderComponent,
   ],
   imports : [
-    CommonModule
+    CommonModule,
+    // NgxSpinnerModule,
   ],
   exports : [
     HeaderComponent,
+    // NgxSpinnerModule,
     CommonModule,
     NzAffixModule,
     NzAlertModule,

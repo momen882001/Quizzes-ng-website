@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { User } from './signup/user.model';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { environment } from 'src/environments/environment.prod';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +14,6 @@ export class AuthService {
     private router: Router,
     private message: NzMessageService
   ) {}
-  user = new BehaviorSubject<any>(null);
 
   signUp(signupData: User): void {
     this.http.post<User>(environment.APIUrl + 'Register', signupData).subscribe(
@@ -40,9 +38,8 @@ export class AuthService {
       .subscribe(
         (resData: any) => {
           console.log(resData);
-          console.log(resData.data.accessToken);
-          this.user.next(resData.data.accessToken);
           localStorage.setItem('accessToken', resData.data.accessToken);
+          localStorage.setItem('role', resData.data.roles[0]);
           this.message.create('success', 'Logined successfully', {
             nzDuration: 4000,
           });
@@ -50,7 +47,7 @@ export class AuthService {
             this.router.navigate(['/admin']);
           } else if (resData.data.roles[0] === 'Teacher') {
             this.router.navigate(['/teacher']);
-          } else if (resData.data.roles[0] === 'Student') {
+          } else if (resData.data.roles[0] === 'User') {
             this.router.navigate(['/student']);
           }
         },
@@ -60,16 +57,6 @@ export class AuthService {
       );
   }
 
-  autoLogin() {
-    let userToken = localStorage.getItem('accessToken');
-    if (userToken === null) {
-      this.user.next(null);
-      console.log(userToken);
-    } else {
-      console.log(userToken);
-      this.user.next(userToken);
-    }
-  }
 
   // using fake API
 

@@ -38,10 +38,14 @@ export class CreateExamComponent implements OnInit {
         .subscribe(
           (resData: any) => {
             this.examLink = resData.data
+            console.log(resData.data);
+
             this.alertToggle = true;
           },
           (err) => {
             console.log(err);
+            console.log(err.error.message);
+
           }
         );
         this.validateForm.reset()

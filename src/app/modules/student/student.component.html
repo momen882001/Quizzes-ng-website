@@ -1,0 +1,21 @@
+<nz-layout class="layout">
+  <nz-sider nzCollapsible nzBreakpoint="md" [nzCollapsedWidth]="40">
+    <h3 class="logo">Student Dashboard</h3>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-menu-item routerLink="profile">
+        <i nz-icon nzType="profile" nzTheme="outline"></i>
+        <span>Profile</span>
+      </li>
+      <li nz-menu-item routerLink="results">
+        <i nz-icon nzType="fund" nzTheme="outline"></i>
+        <span>Exams history</span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <app-header></app-header>
+    <nz-content>
+      <router-outlet></router-outlet>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

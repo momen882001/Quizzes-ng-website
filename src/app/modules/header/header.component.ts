@@ -13,14 +13,18 @@ export class HeaderComponent implements OnInit {
   token!: string | null;
 
   ngOnInit(): void {
-    // this.token = localStorage.getItem('accessToken') !== null ? localStorage.getItem('accessToken') : null;
-    // this.isLogined = localStorage.getItem('accessToken') !== null ? true : false;
+    this.token =
+      localStorage.getItem('accessToken') !== null
+        ? localStorage.getItem('accessToken')
+        : null;
+    this.isLogined =
+      localStorage.getItem('accessToken') !== null ? true : false;
     //  this.authService.user.subscribe((token) => {
     //   this.isLogined =
     //     !token || localStorage.getItem('accessToken') === null ? false : true;
     // });
-    this.isLogined = localStorage.getItem('accessToken') ? true : false;
-    this.authService.autoLogin();
+    // this.isLogined = localStorage.getItem('accessToken') ? true : false;
+    // this.authService.autoLogin();
   }
 
   onNavigateSignUp() {
@@ -28,13 +32,12 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogout() {
-    localStorage.removeItem('accessToken');
-    // this.router.navigate(['/login']);
-    // this.authService.user.subscribe( token => {
-    //   if (!token) {
-    //     localStorage.removeItem('accessToken')
-    //   }
-    // })
+    if (localStorage.getItem('accessToken') !== null) {
+      localStorage.removeItem('accessToken');
+      if (localStorage.getItem('accessToken') == null) {
+        this.router.navigate(['/login']);
+      }
+    }
   }
 
   onNavigateLogin() {

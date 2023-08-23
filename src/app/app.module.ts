@@ -24,6 +24,9 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule,
     SharedModule,
+    // BrowserAnimationsModule,
+    // NgxSpinnerModule,
+    // NgxSpinnerModule.forRoot({ type: 'ball-spin-clockwise-fade' }),
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

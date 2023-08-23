@@ -1,9 +1,21 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { StudentComponent } from './component/student.component';
+import { StudentComponent } from './student.component';
+import { StartExamComponent } from './components/start-exam/start-exam.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { ExamsHistoryComponent } from './components/exams-history/exams-history.component';
 
-const studentRoutes: Routes = [{ path: '', component: StudentComponent }];
+const studentRoutes: Routes = [
+  {
+    path: '',
+    component: StudentComponent,
+    children: [
+      { path: 'profile', component: ProfileComponent },
+      { path: 'examsHistory', component: ExamsHistoryComponent },
+      { path: 'startExam/:examId', component: StartExamComponent },
+    ],
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(studentRoutes)],
