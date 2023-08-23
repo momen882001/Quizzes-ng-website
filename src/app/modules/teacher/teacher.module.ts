@@ -14,7 +14,23 @@ import { CreateExamComponent } from './components/subjects/levels/level/create-e
 import { ViewQuestionsComponent } from './components/subjects/levels/level/view-questions/view-questions.component';
 
 @NgModule({
-  declarations: [TeacherComponent,ResultsComponent, SubjectsComponent, ProfileComponent, LevelsComponent, QuestionsComponent, LevelComponent, CreateExamComponent, ViewQuestionsComponent],
-  imports: [CommonModule, TeacherRoutingModule, SharedModule,ReactiveFormsModule, FormsModule],
+  declarations: [
+    TeacherComponent,
+    ResultsComponent,
+    SubjectsComponent,
+    ProfileComponent,
+    LevelsComponent,
+    QuestionsComponent,
+    LevelComponent,
+    CreateExamComponent,
+    ViewQuestionsComponent,
+  ],
+  imports: [
+    CommonModule,
+    TeacherRoutingModule,
+    SharedModule,
+    ReactiveFormsModule,
+    FormsModule,
+  ],
 })
 export class TeacherModule {}

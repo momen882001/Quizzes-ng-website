@@ -1,1 +1,14 @@
-<p>view-questions works!</p>
+<nz-collapse>
+  <nz-collapse-panel
+    *ngFor="let questionEl of allQuestions"
+    [nzHeader]="questionEl.title"
+    [id]="questionEl.id"
+  >
+    <h3 style="margin: 0">
+      {{ questionEl.questions }}
+    </h3>
+    <p style="margin: 0">
+      {{ questionEl.description }}
+    </p>
+  </nz-collapse-panel>
+</nz-collapse>
