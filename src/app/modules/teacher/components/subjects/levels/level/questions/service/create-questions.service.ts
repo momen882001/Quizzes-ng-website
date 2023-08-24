@@ -15,7 +15,7 @@ export class CreateQuestionService {
     questions: string,
     skillName: number,
     levelId: string,
-    answersList: { answer: string; isCorrect: boolean }[]
+    answersLists: { answer: string; isCorrect: boolean }[]
   ) {
     this.http
       .post(environment.APIUrl + 'CreateQuestion', {
@@ -24,7 +24,7 @@ export class CreateQuestionService {
         questions,
         skillName,
         levelId,
-        answersList,
+        answersLists,
       })
       .subscribe(
         (resData: any) => {

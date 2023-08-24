@@ -22,6 +22,10 @@ export class AuthGuard {
       return true;
     } else {
       return this.router.createUrlTree(['/login']);
+      // this.router.navigate(['/account/login'], {
+      //   queryParams: { returnUrl: state.url },
+      // });
+      // return false;
     }
   }
 }

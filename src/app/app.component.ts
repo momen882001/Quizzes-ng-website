@@ -9,14 +9,14 @@ export class AppComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {
-    if (localStorage.getItem('accessToken') !== null) {
-      if (localStorage.getItem('role') === 'Teacher') {
-        this.router.navigate(['/teacher']);
-      } else if (localStorage.getItem('role') === 'User') {
-        this.router.navigate(['/student']);
-      }
-    } else {
-      this.router.navigate(['/login']);
-    }
+    // if (localStorage.getItem('accessToken') !== null) {
+    //   if (localStorage.getItem('role') === 'Teacher') {
+    //     this.router.navigate(['/teacher']);
+    //   } else if (localStorage.getItem('role') === 'User') {
+    //     this.router.navigate(['/student']);
+    //   }
+    // } else {
+    //   this.router.navigate(['/login']);
+    // }
   }
 }

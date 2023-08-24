@@ -28,18 +28,20 @@ export class QuestionsComponent implements OnInit {
       questions: ['', [Validators.required]],
       isCorrect: [null],
       skillName: ['', [Validators.required]],
-      answersList: new FormArray([]),
+      answersLists: new FormArray([],Validators.required),
       description: ['', [Validators.required]],
     });
   }
 
   ngOnInit(): void {
-    (<FormArray>this.validateForm.get('answersList')).push(
-      new FormGroup({
-        answer: new FormControl('', Validators.required),
-        isCorrect: new FormControl(null),
-      })
-    );
+    for (let i = 0; i < 2; i++) {
+      (<FormArray>this.validateForm.get('answersLists')).push(
+        new FormGroup({
+          answer: new FormControl('', Validators.required),
+          isCorrect: new FormControl(null),
+        })
+      );
+    }
     this.route.params.subscribe((params: Params) => {
       this.levelId = params['levelId'];
     });
@@ -57,15 +59,15 @@ export class QuestionsComponent implements OnInit {
   }
 
   getControls() {
-    return (this.validateForm.get('answersList') as FormArray).controls;
+    return (this.validateForm.get('answersLists') as FormArray).controls;
   }
 
   removeField(index: number) {
-    (<FormArray>this.validateForm.get('answersList')).removeAt(index);
+    (<FormArray>this.validateForm.get('answersLists')).removeAt(index);
   }
 
   addField() {
-    (<FormArray>this.validateForm.get('answersList')).push(
+    (<FormArray>this.validateForm.get('answersLists')).push(
       new FormGroup({
         answer: new FormControl('', Validators.required),
         isCorrect: new FormControl(null),
@@ -79,14 +81,14 @@ export class QuestionsComponent implements OnInit {
       const description = this.validateForm.value.description;
       const questions = this.validateForm.value.questions;
       const skillName = this.validateForm.value.skillName;
-      const answersList = this.validateForm.value.answersList;
+      const answersLists = this.validateForm.value.answersLists;
       this.questionService.createQuestion(
         title,
         description,
         questions,
         skillName,
         this.levelId,
-        answersList
+        answersLists
       );
       this.validateForm.reset();
     } else {
