@@ -5,7 +5,6 @@ const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'teacher', redirectTo: '/teacher/subjects', pathMatch: 'full' },
   { path: 'student', redirectTo: '/student/examsHistory', pathMatch: 'full' },
-  { path: '**', redirectTo: '/login' },
   {
     path: 'login',
     loadChildren: () =>

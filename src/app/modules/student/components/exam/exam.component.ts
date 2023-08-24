@@ -13,6 +13,7 @@ export class ExamComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
   examId!: string;
+  time : number = 875677
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {

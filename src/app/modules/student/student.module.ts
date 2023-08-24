@@ -7,6 +7,7 @@ import { SharedModule } from 'src/app/core/shared/shared.module';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ExamsHistoryComponent } from './components/exams-history/exams-history.component';
 import { ExamComponent } from './components/exam/exam.component';
+import { CountdownModule } from 'ngx-countdown';
 
 
 
@@ -15,7 +16,8 @@ import { ExamComponent } from './components/exam/exam.component';
   imports: [
     CommonModule,
     StudentRoutingModule,
-    SharedModule
+    SharedModule,
+    CountdownModule
   ]
 })
 export class StudentModule { }
