@@ -11,8 +11,17 @@ export class ViewQuestionService {
   constructor(private http: HttpClient, private router: Router) {}
 
   getAllQuestions(levelId: string) {
-    return this.http.get<viewQuestionInterface[]>(environment.APIUrl + 'ShowAllQuestion', {
-      params: new HttpParams().set('levelId', levelId),
+    return this.http.get<viewQuestionInterface[]>(
+      environment.APIUrl + 'ShowAllQuestion',
+      {
+        params: new HttpParams().set('levelId', levelId),
+      }
+    );
+  }
+
+  deleteQuestion(questionId: string) {
+    return this.http.delete(environment.APIUrl + 'DeleteQuestion', {
+      params: new HttpParams().set('id', questionId),
     });
   }
 }

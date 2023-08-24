@@ -17,13 +17,28 @@ export class ViewQuestionsComponent implements OnInit {
   allQuestions!: viewQuestionInterface[];
   levelId!: string;
 
-
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.levelId = params['levelId'];
       console.log(this.levelId);
     });
     this.loadQuestions();
+  }
+
+  cancel(): void {
+    //
+  }
+
+  confirm(questionId: string): void {
+    this.viewQuesService.deleteQuestion(questionId).subscribe(
+      (resData: any) => {
+        console.log(resData);
+        this.loadQuestions();
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
   }
 
   private loadQuestions() {

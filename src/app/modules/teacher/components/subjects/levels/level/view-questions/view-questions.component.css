@@ -1,0 +1,13 @@
+.collapse-container {
+  width: 90%;
+  margin: 1rem 5% 1rem 5%;
+}
+
+.question-content-container {
+  padding: 1rem;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: flex-end;
+}

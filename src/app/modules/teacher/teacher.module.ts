@@ -9,7 +9,6 @@ import { SharedModule } from 'src/app/core/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LevelsComponent } from './components/subjects/levels/levels.component';
 import { QuestionsComponent } from './components/subjects/levels/level/questions/questions.component';
-import { LevelComponent } from './components/subjects/levels/level/level.component';
 import { CreateExamComponent } from './components/subjects/levels/level/create-exam/create-exam.component';
 import { ViewQuestionsComponent } from './components/subjects/levels/level/view-questions/view-questions.component';
 
@@ -21,7 +20,6 @@ import { ViewQuestionsComponent } from './components/subjects/levels/level/view-
     ProfileComponent,
     LevelsComponent,
     QuestionsComponent,
-    LevelComponent,
     CreateExamComponent,
     ViewQuestionsComponent,
   ],

@@ -29,8 +29,7 @@ export class QuestionsComponent implements OnInit {
       isCorrect: [null],
       skillName: ['', [Validators.required]],
       answersList: new FormArray([]),
-      description: ['',[Validators.required]],
-      // newForm: new FormArray([], Validators.required),
+      description: ['', [Validators.required]],
     });
   }
 
@@ -87,7 +86,7 @@ export class QuestionsComponent implements OnInit {
         questions,
         skillName,
         this.levelId,
-        answersList,
+        answersList
       );
       this.validateForm.reset();
     } else {
@@ -99,23 +98,4 @@ export class QuestionsComponent implements OnInit {
       });
     }
   }
-
-  // Add question in the same component
-
-  // getFormControls() {
-  //   return (this.validateForm.get('newForm') as FormArray).controls;
-  // }
-
-  // addForm() {
-  //   (<FormArray>this.validateForm.get('newForm')).push(
-  //     new FormGroup({
-  //       wrongAnswer: new FormControl('', Validators.required),
-  //       quesTitle: new FormControl('', [Validators.required]),
-  //       question: new FormControl('', [Validators.required]),
-  //       rightAnswer: new FormControl('', [Validators.required]),
-  //       wrongAnswers: new FormArray([], Validators.required),
-  //       description: new FormControl(''),
-  //     })
-  //   );
-  // }
 }
