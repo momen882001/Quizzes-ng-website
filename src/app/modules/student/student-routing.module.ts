@@ -4,11 +4,13 @@ import { StudentComponent } from './student.component';
 import { StartExamComponent } from './components/start-exam/start-exam.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ExamsHistoryComponent } from './components/exams-history/exams-history.component';
+import { AuthGuard } from '../auth/auth-guard.service';
 
 const studentRoutes: Routes = [
   {
     path: '',
     component: StudentComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: 'profile', component: ProfileComponent },
       { path: 'examsHistory', component: ExamsHistoryComponent },
