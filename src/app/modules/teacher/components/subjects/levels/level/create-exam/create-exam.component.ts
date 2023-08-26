@@ -3,6 +3,8 @@ import {
   UntypedFormGroup,
   UntypedFormBuilder,
   Validators,
+  FormGroup,
+  FormControl,
 } from '@angular/forms';
 import { CreateExamService } from './service/create-exam.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -21,6 +23,7 @@ export class CreateExamComponent implements OnInit {
   editMode: boolean = false;
   examId!: string;
 
+
   constructor(
     private fb: UntypedFormBuilder,
     private createExamService: CreateExamService,
@@ -31,25 +34,29 @@ export class CreateExamComponent implements OnInit {
 
   submitForm(): void {
     if (this.validateForm.valid) {
-      const title = this.validateForm.value.title;
-      const questionCount = this.validateForm.value.questionCount;
-      const duration = this.validateForm.value.duration
-        .toString()
-        .split(' ')[4];
-      this.createExamService
-        .onCreateExam(title, questionCount, duration, this.levelId)
-        .subscribe(
-          (resData: any) => {
-            this.examLink = resData.data;
-            console.log(resData.data);
+      if (this.editMode) {
+        console.log(this.validateForm.value);
+      } else {
+        const title = this.validateForm.value.title;
+        const questionCount = this.validateForm.value.questionCount;
+        const duration = this.validateForm.value.duration
+          .toString()
+          .split(' ')[4];
+        this.createExamService
+          .onCreateExam(title, questionCount, duration, this.levelId)
+          .subscribe(
+            (resData: any) => {
+              this.examLink = resData.data;
+              console.log(resData.data);
 
-            this.alertToggle = true;
-          },
-          (err) => {
-            console.log(err);
-            console.log(err.error.message);
-          }
-        );
+              this.alertToggle = true;
+            },
+            (err) => {
+              console.log(err);
+              console.log(err.error.message);
+            }
+          );
+      }
       this.validateForm.reset();
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
@@ -63,6 +70,25 @@ export class CreateExamComponent implements OnInit {
 
   ngOnInit(): void {
     this.alertToggle = false;
+    this.route.params.subscribe((params: Params) => {
+      this.levelId = params['levelId'];
+      this.examId = params['examId'];
+      this.editMode = params['examId'] != null;
+    });
+    this.initForm();
+  }
+
+  private initForm() {
+    if (this.editMode) {
+      console.log('edit mode');
+      this.viewExamService.getExam(this.examId).subscribe((res: any) => {
+        console.log(res.data.title);
+        this.validateForm.patchValue({
+          title: res.data.title,
+          questionCount: res.data.questionCount,
+        })
+      });
+    }
     this.validateForm = this.fb.group({
       title: [null, [Validators.required]],
       questionCount: [
@@ -71,26 +97,5 @@ export class CreateExamComponent implements OnInit {
       ],
       duration: [null, [Validators.required]],
     });
-
-    this.route.params.subscribe((params: Params) => {
-      this.levelId = params['levelId'];
-      this.examId = params['examId'];
-      console.log(this.examId);
-      this.editMode = params['examId'] != null;
-    });
-
-    this.loadExamById()
-  }
-
-  private loadExamById() {
-    this.viewExamService.getExam(this.examId).subscribe(
-      (res: any) => {
-        console.log(res);
-        console.log(res.data);
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    );
   }
 }
