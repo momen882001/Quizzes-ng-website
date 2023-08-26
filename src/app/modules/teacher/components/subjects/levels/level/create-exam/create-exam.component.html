@@ -77,7 +77,7 @@
         ></nz-alert>
         <p>{{ examLink }}</p>
         <button nz-button class="exam-form-button" [nzType]="'primary'">
-          Submit
+          {{ editMode ? "Edit" : "Submit" }}
         </button>
         <a class="back-link" [routerLink]="['../../']"
           ><i nz-icon nzType="step-backward" nzTheme="outline"></i

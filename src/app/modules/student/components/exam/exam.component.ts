@@ -1,6 +1,7 @@
 import { ActivatedRoute, Params } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { StudentService } from '../../student.service';
+import { CountdownComponent, CountdownConfig, CountdownEvent } from 'ngx-countdown';
 
 @Component({
   selector: 'app-exam',
@@ -8,12 +9,14 @@ import { StudentService } from '../../student.service';
   styleUrls: ['./exam.component.css'],
 })
 export class ExamComponent implements OnInit {
+  @ViewChild('cd', { static: false }) private countdown!: CountdownComponent;
+  private config!: CountdownConfig;
   constructor(
     private studentService: StudentService,
     private route: ActivatedRoute
   ) {}
   examId!: string;
-  time : number = 875677
+  time : number = 40
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -27,5 +30,7 @@ export class ExamComponent implements OnInit {
         console.log(err);
       }
     );
+    console.log(this.countdown);
   }
+
 }

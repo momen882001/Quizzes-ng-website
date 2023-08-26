@@ -11,6 +11,7 @@ import { LevelsComponent } from './components/subjects/levels/levels.component';
 import { QuestionsComponent } from './components/subjects/levels/level/questions/questions.component';
 import { CreateExamComponent } from './components/subjects/levels/level/create-exam/create-exam.component';
 import { ViewQuestionsComponent } from './components/subjects/levels/level/view-questions/view-questions.component';
+import { ViewExamsComponent } from './components/subjects/levels/level/view-exams/view-exams.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ViewQuestionsComponent } from './components/subjects/levels/level/view-
     QuestionsComponent,
     CreateExamComponent,
     ViewQuestionsComponent,
+    ViewExamsComponent,
   ],
   imports: [
     CommonModule,

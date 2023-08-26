@@ -1,0 +1,40 @@
+.collapse-container {
+  width: 94%;
+  margin: 1rem 3% 1rem 3%;
+}
+
+.exam-content-container {
+  padding: 1rem;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.buttons-container a i {
+  color: red;
+  font-size: larger;
+}
+
+.url-text-copy {
+  display: flex;
+}
+
+.url-text-copy p {
+  margin-right: 0.3rem;
+}
+
+.url-text-copy i {
+  font-size: larger;
+  color: gray;
+  cursor: pointer;
+}
+
+/* media */
+@media screen and (max-width: 480px) {
+  .url-text-copy {
+    display: flex;
+    flex-direction: column;
+  }
+}

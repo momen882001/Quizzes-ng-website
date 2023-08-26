@@ -1,0 +1,43 @@
+<nz-collapse class="collapse-container">
+  <nz-collapse-panel
+    *ngFor="let examEl of examsData; let i = index"
+    [nzHeader]="i + 1 + '. ' + examEl.title"
+    [id]="examEl.id"
+  >
+    <div class="exam-content-container">
+      <div class="question-count-container">
+        <h5>Question count :</h5>
+        <p>{{ examEl.questionCount }}</p>
+      </div>
+      <div class="duration-container">
+        <h5>Duration :</h5>
+        <p>{{ examEl.duration }}</p>
+      </div>
+      <div class="url-container">
+        <h5>URL :</h5>
+        <div class="url-text-copy">
+          <p>{{ examEl.url }}</p>
+          <i
+            (click)="copyText(examEl.url)"
+            nz-icon
+            nzType="copy"
+            nzTheme="outline"
+          ></i>
+        </div>
+      </div>
+      <div class="buttons-container">
+        <a
+          nz-popconfirm
+          nzPopconfirmTitle="Are you sure delete this item?"
+          (nzOnConfirm)="confirm(examEl.id)"
+          (nzOnCancel)="cancel()"
+        >
+          <i nz-icon nzType="delete" nzTheme="outline"></i>
+        </a>
+        <a [routerLink]="['editExam', examEl.id]">
+          <i nz-icon nzType="edit" nzTheme="outline"></i>
+        </a>
+      </div>
+    </div>
+  </nz-collapse-panel>
+</nz-collapse>

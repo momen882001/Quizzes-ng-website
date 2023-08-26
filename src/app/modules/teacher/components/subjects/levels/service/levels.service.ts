@@ -17,7 +17,7 @@ export class LevelsService {
   }
 
   getLevels(subjectId: string) {
-    return this.http.get(environment.APIUrl + 'ShowAllLevel/', {
+    return this.http.get(environment.APIUrl + 'GetAllLevels/', {
       params: new HttpParams().set('SubjectId', subjectId),
     });
   }

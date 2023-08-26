@@ -6,6 +6,7 @@ import {
 } from '@angular/forms';
 import { CreateExamService } from './service/create-exam.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ViewExamsService } from '../view-exams/service/view-exams.service';
 
 @Component({
   selector: 'app-create-exam',
@@ -15,15 +16,17 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 export class CreateExamComponent implements OnInit {
   validateForm!: UntypedFormGroup;
   levelId!: string;
-  alertToggle : boolean = false;
-  examLink! : string
-
+  alertToggle: boolean = false;
+  examLink!: string;
+  editMode: boolean = false;
+  examId!: string;
 
   constructor(
     private fb: UntypedFormBuilder,
     private createExamService: CreateExamService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private viewExamService: ViewExamsService
   ) {}
 
   submitForm(): void {
@@ -37,7 +40,7 @@ export class CreateExamComponent implements OnInit {
         .onCreateExam(title, questionCount, duration, this.levelId)
         .subscribe(
           (resData: any) => {
-            this.examLink = resData.data
+            this.examLink = resData.data;
             console.log(resData.data);
 
             this.alertToggle = true;
@@ -45,10 +48,9 @@ export class CreateExamComponent implements OnInit {
           (err) => {
             console.log(err);
             console.log(err.error.message);
-
           }
         );
-        this.validateForm.reset()
+      this.validateForm.reset();
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {
@@ -72,7 +74,23 @@ export class CreateExamComponent implements OnInit {
 
     this.route.params.subscribe((params: Params) => {
       this.levelId = params['levelId'];
-      console.log(this.levelId);
+      this.examId = params['examId'];
+      console.log(this.examId);
+      this.editMode = params['examId'] != null;
     });
+
+    this.loadExamById()
+  }
+
+  private loadExamById() {
+    this.viewExamService.getExam(this.examId).subscribe(
+      (res: any) => {
+        console.log(res);
+        console.log(res.data);
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
   }
 }
