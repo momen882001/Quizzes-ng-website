@@ -52,12 +52,15 @@
             nzValidatingTip="Validating..."
             [nzErrorTip]="timeError"
           >
-            <nz-form-label nzRequired>Time</nz-form-label>
-            <br />
-            <nz-time-picker
-              class="time-input"
-              formControlName="duration"
-            ></nz-time-picker>
+          <nz-form-label nzRequired>Time in minutes</nz-form-label>
+            <nz-input-group>
+              <input
+                nz-input
+                type="number"
+                formControlName="duration"
+                placeholder="Write exam time in minutes"
+              />
+            </nz-input-group>
             <ng-template #timeError let-control>
               <ng-container *ngIf="control.hasError('required')"
                 >Please input time of exam!</ng-container
@@ -75,7 +78,7 @@
           nzType="success"
           nzMessage="Exam is created successfully"
         ></nz-alert>
-        <p>{{ examLink }}</p>
+        <!-- <p>{{ examLink }}</p> -->
         <button nz-button class="exam-form-button" [nzType]="'primary'">
           {{ editMode ? "Edit" : "Submit" }}
         </button>

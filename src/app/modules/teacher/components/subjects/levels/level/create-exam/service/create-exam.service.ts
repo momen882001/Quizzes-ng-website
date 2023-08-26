@@ -12,7 +12,7 @@ export class CreateExamService {
 
   ) {}
 
-  onCreateExam(title : string , questionCount : number , duration : Date , levelId : string) {
+  onCreateExam(title : string , questionCount : number , duration : number , levelId : string) {
    return this.http.post( environment.APIUrl + 'CreateExam', {
     title,
     questionCount,

@@ -3,12 +3,11 @@ import {
   UntypedFormGroup,
   UntypedFormBuilder,
   Validators,
-  FormGroup,
-  FormControl,
 } from '@angular/forms';
 import { CreateExamService } from './service/create-exam.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ViewExamsService } from '../view-exams/service/view-exams.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-exam',
@@ -23,32 +22,46 @@ export class CreateExamComponent implements OnInit {
   editMode: boolean = false;
   examId!: string;
 
-
   constructor(
     private fb: UntypedFormBuilder,
     private createExamService: CreateExamService,
     private route: ActivatedRoute,
-    private router: Router,
-    private viewExamService: ViewExamsService
+    private viewExamService: ViewExamsService,
+    private router: Router
   ) {}
 
   submitForm(): void {
     if (this.validateForm.valid) {
       if (this.editMode) {
-        console.log(this.validateForm.value);
+        const title = this.validateForm.value.title;
+        const questionCount = this.validateForm.value.questionCount;
+        const duration = this.validateForm.value.duration;
+        this.viewExamService
+          .editExam(this.examId, title, questionCount, duration)
+          .subscribe(
+            (res: any) => {
+              console.log(res);
+              this.router.navigate(['../../'], { relativeTo: this.route });
+            },
+            (err: any) => {
+              console.log(err);
+            }
+          );
       } else {
         const title = this.validateForm.value.title;
         const questionCount = this.validateForm.value.questionCount;
-        const duration = this.validateForm.value.duration
-          .toString()
-          .split(' ')[4];
+        const duration = this.validateForm.value.duration;
         this.createExamService
           .onCreateExam(title, questionCount, duration, this.levelId)
           .subscribe(
             (resData: any) => {
               this.examLink = resData.data;
               console.log(resData.data);
-
+              Swal.fire({
+                icon: 'success',
+                title: 'You can copy exam link and share it with others',
+                text: `${resData.data}`,
+              })
               this.alertToggle = true;
             },
             (err) => {
@@ -86,7 +99,8 @@ export class CreateExamComponent implements OnInit {
         this.validateForm.patchValue({
           title: res.data.title,
           questionCount: res.data.questionCount,
-        })
+          duration: res.data.duration,
+        });
       });
     }
     this.validateForm = this.fb.group({
@@ -95,7 +109,10 @@ export class CreateExamComponent implements OnInit {
         null,
         [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)],
       ],
-      duration: [null, [Validators.required]],
+      duration: [
+        null,
+        [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)],
+      ],
     });
   }
 }
