@@ -13,4 +13,8 @@ export class StudentService {
       params: new HttpParams().set('ExamId', examId),
     });
   }
+
+  studentExamsHistory() {
+    return this.http.get(environment.APIUrl + 'StudentHistory');
+  }
 }

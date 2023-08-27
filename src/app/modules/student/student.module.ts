@@ -8,6 +8,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ExamsHistoryComponent } from './components/exams-history/exams-history.component';
 import { ExamComponent } from './components/exam/exam.component';
 import { CountdownModule } from 'ngx-countdown';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -17,7 +18,8 @@ import { CountdownModule } from 'ngx-countdown';
     CommonModule,
     StudentRoutingModule,
     SharedModule,
-    CountdownModule
+    CountdownModule,
+    ReactiveFormsModule
   ]
 })
 export class StudentModule { }

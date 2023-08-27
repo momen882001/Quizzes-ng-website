@@ -1,12 +1,18 @@
 import { ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { StudentService } from '../../student.service';
-import {
-  CountdownEvent,
-} from 'ngx-countdown';
+import { CountdownEvent } from 'ngx-countdown';
 
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
+import {
+  FormArray,
+  FormControl,
+  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-exam',
@@ -15,15 +21,26 @@ import Swal from 'sweetalert2';
 })
 export class ExamComponent implements OnInit, OnDestroy {
   timerSubscription!: Subscription;
+  validateForm!: UntypedFormGroup;
   constructor(
+    private fb: UntypedFormBuilder,
     private studentService: StudentService,
     private route: ActivatedRoute
   ) {}
   examId!: string;
-  time! : any
-  examData! : any
+  time!: any;
+  examData!: any;
+  titleExam!: string;
 
   ngOnInit(): void {
+    this.validateForm = this.fb.group({
+      correctLists: new FormArray([
+        new FormGroup({
+          answerId: new FormControl(''),
+          questionId: new FormControl(''),
+        }),
+      ]),
+    });
     this.route.params.subscribe((params: Params) => {
       this.examId = params['examId'];
     });
@@ -31,7 +48,9 @@ export class ExamComponent implements OnInit, OnDestroy {
       (resData: any) => {
         console.log(resData);
         console.log(resData.data);
-        this.time = resData.data[0].duration * 60
+        this.examData = resData.data;
+        this.titleExam = resData.data[0].titleExam;
+        this.time = resData.data[0].duration * 60;
         console.log(resData.data[0].duration);
       },
       (err: any) => {
@@ -48,6 +67,10 @@ export class ExamComponent implements OnInit, OnDestroy {
         text: 'Exam Submitted',
       });
     }
+  }
+
+  submitForm() {
+    console.log(this.validateForm.value);
   }
 
   ngOnDestroy(): void {

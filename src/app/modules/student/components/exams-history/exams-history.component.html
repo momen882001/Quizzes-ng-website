@@ -1,1 +1,22 @@
-<p>exams-history works!</p>
+<div class="container">
+  <nz-table class="table" #basicTable [nzData]="exams">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Question Count</th>
+        <th>Duration</th>
+        <th>Score</th>
+        <th>Exam Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let examEl of exams">
+        <td>{{ examEl.title }}</td>
+        <td>{{ examEl.questionCount }}</td>
+        <td>{{ examEl.duration }}</td>
+        <td>{{ examEl.score }}</td>
+        <td>{{ examEl.examDate }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
