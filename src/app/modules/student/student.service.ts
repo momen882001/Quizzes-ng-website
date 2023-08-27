@@ -8,8 +8,8 @@ import { environment } from 'src/environments/environment.prod';
 export class StudentService {
   constructor(private http: HttpClient) {}
 
-  startExam(examId: string) {
-    return this.http.get(environment.APIUrl + 'ExamQuestion', {
+  getExam(examId: string) {
+    return this.http.get(environment.APIUrl + 'ExamQuestions', {
       params: new HttpParams().set('ExamId', examId),
     });
   }

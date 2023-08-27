@@ -1,2 +1,2 @@
 <p>exam works!</p>
-<countdown #cd [config]="{ leftTime: time , notify : [10] }"></countdown>
+<countdown  [config]="{ leftTime: time }" (event)="handleEvent($event)"></countdown>
