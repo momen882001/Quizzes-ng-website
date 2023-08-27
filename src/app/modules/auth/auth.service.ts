@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from './signup/user.model';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { environment } from 'src/environments/environment.prod';
@@ -12,6 +12,7 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router,
+    private route: ActivatedRoute,
     private message: NzMessageService
   ) {}
 
@@ -37,18 +38,23 @@ export class AuthService {
       })
       .subscribe(
         (resData: any) => {
-          console.log(resData);
           localStorage.setItem('accessToken', resData.data.accessToken);
           localStorage.setItem('role', resData.data.roles[0]);
           this.message.create('success', 'Logined successfully', {
             nzDuration: 4000,
           });
           if (resData.data.roles[0] === 'Admin') {
-            this.router.navigate(['/admin']);
+            const returnUrl =
+              this.route.snapshot.queryParams['returnUrl'] || '/admin';
+            this.router.navigateByUrl(returnUrl);
           } else if (resData.data.roles[0] === 'Teacher') {
-            this.router.navigate(['/teacher']);
+            const returnUrl =
+              this.route.snapshot.queryParams['returnUrl'] || '/teacher';
+            this.router.navigateByUrl(returnUrl);
           } else if (resData.data.roles[0] === 'User') {
-            this.router.navigate(['/student']);
+            const returnUrl =
+              this.route.snapshot.queryParams['returnUrl'] || '/student';
+            this.router.navigateByUrl(returnUrl);
           }
         },
         (err: any) => {
@@ -56,7 +62,6 @@ export class AuthService {
         }
       );
   }
-
 
   // using fake API
 

@@ -21,11 +21,10 @@ export class AuthGuard {
     if (localStorage.getItem('accessToken') !== null) {
       return true;
     } else {
-      return this.router.createUrlTree(['/login']);
-      // this.router.navigate(['/account/login'], {
-      //   queryParams: { returnUrl: state.url },
-      // });
-      // return false;
+      this.router.navigate(['/login'], {
+        queryParams: { returnUrl: state.url },
+      });
+      return false;
     }
   }
 }
