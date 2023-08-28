@@ -8,20 +8,20 @@
     <div class="login-container">
       <h2>{{ titleExam }}</h2>
       <div class="separator"></div>
-      <p>{{ currentQuestion + 1 + "of" + examData.length }}</p>
+      <p>{{ currentQuestion + 1 + " of " + examData.length }}</p>
       <h3>
         {{ examData[currentQuestion]?.questions }}
       </h3>
       <nz-radio-group
         *ngFor="let answerEl of examData[currentQuestion]?.answerlist"
-        onchange="testRadio($event)"
+        [(ngModel)]="answerIdValue"
       >
         <label nz-radio [nzValue]="answerEl.id">{{ answerEl.answer }}</label>
       </nz-radio-group>
       <button
         *ngIf="this.currentQuestion + 1 === this.examData.length"
         nz-button
-        (click)="onSubmit()"
+        (click)="onSubmit(examData[currentQuestion]?.id, answerIdValue)"
         class="exam-form-button"
         [nzType]="'primary'"
       >
@@ -30,7 +30,7 @@
       <button
         *ngIf="!(this.currentQuestion + 1 === this.examData.length)"
         nz-button
-        (click)="onNext(examData[currentQuestion]?.id, '15562')"
+        (click)="onNext(examData[currentQuestion]?.id, answerIdValue)"
         class="exam-form-button"
         [nzType]="'primary'"
       >

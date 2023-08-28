@@ -5,14 +5,7 @@ import { CountdownEvent } from 'ngx-countdown';
 
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
-import {
-  FormArray,
-  FormControl,
-  FormGroup,
-  UntypedFormBuilder,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-exam',
@@ -29,11 +22,12 @@ export class ExamComponent implements OnInit, OnDestroy {
   ) {}
   examId!: string;
   time!: any;
-  examData : any[] = []
+  examData: any[] = [];
   titleExam!: string;
   currentQuestion: number = 0;
+  answerIdValue: string = '';
 
-  correctLists: testObject[] = []
+  correctLists: testObject[] = [];
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -70,9 +64,20 @@ export class ExamComponent implements OnInit, OnDestroy {
     }
   }
 
-  onSubmit() {
+  onSubmit(quesId: string, answerId: string) {
+    this.correctLists.push({
+      questionId: quesId,
+      answerId: answerId,
+    });
+    this.studentService.finishExam(this.examId, this.correctLists).subscribe(
+      (resData: any) => {
+        console.log(resData);
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
     console.log(this.correctLists);
-
   }
 
   testRadio(event: any) {

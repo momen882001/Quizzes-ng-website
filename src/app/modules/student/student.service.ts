@@ -17,4 +17,11 @@ export class StudentService {
   studentExamsHistory() {
     return this.http.get(environment.APIUrl + 'StudentHistory');
   }
+
+  finishExam(examId: string, correctLists: any[]) {
+    return this.http.post(environment.APIUrl + 'AnswersCorrection', {
+      examId,
+      correctLists,
+    });
+  }
 }

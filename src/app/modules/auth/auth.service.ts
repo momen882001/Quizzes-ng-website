@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from './signup/user.model';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { environment } from 'src/environments/environment.prod';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
@@ -59,6 +60,10 @@ export class AuthService {
         },
         (err: any) => {
           console.log(err);
+          Swal.fire({
+            icon: 'error',
+            text: `${err.error.Message}`,
+          })
         }
       );
   }

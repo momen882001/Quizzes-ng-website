@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
 
   onLogout() {
     if (localStorage.getItem('accessToken') !== null) {
-      localStorage.removeItem('accessToken');
+      localStorage.clear();
       if (localStorage.getItem('accessToken') == null) {
         this.router.navigate(['/login']);
       }
