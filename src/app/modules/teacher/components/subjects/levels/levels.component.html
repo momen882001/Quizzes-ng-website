@@ -1,4 +1,7 @@
-<div class="container">
+<div class="container" *ngIf="levels.length === 0">
+  <h1>There are no Levels!</h1>
+</div>
+<div class="container" *ngIf="!(levels.length === 0)">
   <div class="row" style="margin: 1rem 0rem 1rem 0rem">
     <div
       class="col-xs-2 col-sm-2 col-md-3 col-lg-3"
@@ -70,9 +73,9 @@
           <a [routerLink]="[level.id, 'viewQues']">View Questions</a>
           <hr />
           <a [routerLink]="[level.id, 'viewExams']">View Exams</a>
-          <br>
-          <br>
-          <a style="color: darkred;" (click)="clickMe()">Close</a>
+          <br />
+          <br />
+          <a style="color: darkred" (click)="clickMe()">Close</a>
         </ng-template>
         <td class="table-cell edit-level">
           <i

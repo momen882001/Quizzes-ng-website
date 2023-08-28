@@ -1,0 +1,27 @@
+<div class="container">
+  <nz-table
+    [nzPageSize]="10"
+    class="table"
+    #basicTable
+    [nzData]="examsHistory"
+  >
+    <thead>
+      <tr>
+        <th>Fullname</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Score</th>
+        <th>Exam Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let examEl of examsHistory">
+        <td>{{ examEl.fullName }}</td>
+        <td>{{ examEl.email }}</td>
+        <td>{{ examEl.phoneNumber }}</td>
+        <td>{{ examEl.score }}</td>
+        <td>{{ examEl.examDate }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

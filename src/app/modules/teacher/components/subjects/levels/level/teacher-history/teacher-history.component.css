@@ -1,0 +1,7 @@
+.table {
+  overflow-y: scroll;
+  height: 31rem;
+  width: 95%;
+  margin-left: 2.5%;
+  margin-top: 2rem;
+}

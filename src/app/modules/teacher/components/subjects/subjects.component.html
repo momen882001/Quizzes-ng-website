@@ -1,4 +1,7 @@
-<div class="container">
+<div class="container" *ngIf="subjects.length === 0">
+  <h1>There are no Subjects!</h1>
+</div>
+<div class="container" *ngIf="!(subjects.length === 0)">
   <div class="row" style="margin: 1rem 0rem 1rem 0rem">
     <div
       class="col-xs-2 col-sm-2 col-md-3 col-lg-3"
@@ -46,7 +49,6 @@
     [nzData]="subjects"
     [nzPageSize]="10"
     nzScrolly="500px"
-
   >
     <thead>
       <tr>
@@ -57,7 +59,9 @@
     </thead>
     <tbody>
       <tr *ngFor="let subjectEl of subjects">
-        <td class="table-cell" [routerLink]="[subjectEl.id]">{{ subjectEl.name }}</td>
+        <td class="table-cell" [routerLink]="[subjectEl.id]">
+          {{ subjectEl.name }}
+        </td>
         <td class="table-cell edit-subject">
           <i
             (click)="onSubjectEdit(subjectEl.id, subjectEl.name)"
@@ -73,11 +77,7 @@
             (nzOnConfirm)="confirm(subjectEl.id)"
             (nzOnCancel)="cancel()"
           >
-            <i
-              nz-icon
-              nzType="delete"
-              nzTheme="outline"
-            ></i>
+            <i nz-icon nzType="delete" nzTheme="outline"></i>
           </a>
         </td>
       </tr>

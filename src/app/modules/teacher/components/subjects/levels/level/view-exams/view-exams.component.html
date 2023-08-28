@@ -1,4 +1,7 @@
-<nz-collapse class="collapse-container">
+<div class="container" *ngIf="examsData.length === 0">
+  <h1>There are no exams!</h1>
+</div>
+<nz-collapse class="collapse-container" *ngIf="!(examsData.length === 0)">
   <nz-collapse-panel
     *ngFor="let examEl of examsData; let i = index"
     [nzHeader]="i + 1 + '. ' + examEl.title"
@@ -10,7 +13,7 @@
         <p>{{ examEl.questionCount }}</p>
       </div>
       <div class="duration-container">
-        <h5>Duration :</h5>
+        <h5>Duration in minutes :</h5>
         <p>{{ examEl.duration }}</p>
       </div>
       <div class="url-container">
@@ -36,6 +39,9 @@
         </a>
         <a [routerLink]="['editExam', examEl.id]">
           <i nz-icon nzType="edit" nzTheme="outline"></i>
+        </a>
+        <a [routerLink]="['examsHistory', examEl.id]">
+          <i nz-icon nzType="fund-view" nzTheme="outline"></i>
         </a>
       </div>
     </div>

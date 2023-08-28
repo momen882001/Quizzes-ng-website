@@ -15,6 +15,7 @@
 .buttons-container a:first-child i {
   color: red;
   font-size: larger;
+  margin-right: 1rem;
 }
 
 .buttons-container a:last-child i {
