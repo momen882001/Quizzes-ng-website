@@ -1,14 +1,22 @@
-<p>exam works!</p>
-<countdown
-  [config]="{ leftTime: time }"
-  (event)="handleEvent($event)"
-></countdown>
-<div class="row" style="margin: 0">
+<div class="container" *ngIf="isSubmitted">
+  <div class="result">
+    <h2>{{examResult}}</h2>
+    <button nz-button nzType="default" (click)="navigateHistory()">
+      Go to History
+    </button>
+  </div>
+</div>
+<div class="row" style="margin: 0" *ngIf="!isSubmitted">
   <div class="col-12 exam-col">
-    <div class="login-container">
+    <div class="exam-container">
+      <h6 class="questions-number">{{ currentQuestion + 1 + " of " + examData.length }}</h6>
       <h2>{{ titleExam }}</h2>
+        <countdown
+        class="countdown"
+          [config]="{ leftTime: time }"
+          (event)="handleEvent($event)"
+        ></countdown>
       <div class="separator"></div>
-      <p>{{ currentQuestion + 1 + " of " + examData.length }}</p>
       <h3>
         {{ examData[currentQuestion]?.questions }}
       </h3>
@@ -24,21 +32,23 @@
         (click)="onSubmit(examData[currentQuestion]?.id, answerIdValue)"
         class="exam-form-button"
         [nzType]="'primary'"
+        ngClass="submit-button"
       >
         submit
       </button>
       <button
         *ngIf="!(this.currentQuestion + 1 === this.examData.length)"
         nz-button
-        (click)="onNext(examData[currentQuestion]?.id, answerIdValue)"
+        (click)="onNext(examData[currentQuestion]?.id, answerIdValue , examData[currentQuestion+1]?.id)"
         class="exam-form-button"
         [nzType]="'primary'"
+        ngClass="next-button"
       >
         Next
       </button>
       <button
         nz-button
-        (click)="onBack()"
+        (click)="onBack(examData[currentQuestion-1]?.id)"
         class="exam-form-button"
         [nzType]="'primary'"
       >

@@ -1,4 +1,4 @@
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { StudentService } from '../../student.service';
 import { CountdownEvent } from 'ngx-countdown';
@@ -12,20 +12,22 @@ import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
   templateUrl: './exam.component.html',
   styleUrls: ['./exam.component.css'],
 })
-export class ExamComponent implements OnInit, OnDestroy {
+export class ExamComponent implements OnInit {
   timerSubscription!: Subscription;
   validateForm!: UntypedFormGroup;
   constructor(
-    private fb: UntypedFormBuilder,
     private studentService: StudentService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
   examId!: string;
-  time!: any;
+  time!: number;
   examData: any[] = [];
   titleExam!: string;
   currentQuestion: number = 0;
   answerIdValue: string = '';
+  isSubmitted: boolean = false;
+  examResult!: string;
 
   correctLists: testObject[] = [];
 
@@ -35,7 +37,6 @@ export class ExamComponent implements OnInit, OnDestroy {
     });
     this.studentService.getExam(this.examId).subscribe(
       (resData: any) => {
-        console.log(resData);
         console.log(resData.data);
         this.examData = resData.data;
         this.titleExam = resData.data[0].titleExam;
@@ -48,19 +49,66 @@ export class ExamComponent implements OnInit, OnDestroy {
     );
   }
 
-  onNext(quesId: string, answerId: string) {
+  onNext(quesId: string, answerId: string, nextQuestId:string) {
     if (this.currentQuestion < this.examData.length - 1) {
+      console.log('OO: ' + this.examData);
       this.currentQuestion++;
-      this.correctLists.push({
-        questionId: quesId,
-        answerId: answerId,
-      });
+      let isExist: boolean = false;
+      let itemIndex: number = 0;
+      for (let index = 0; index < this.correctLists.length; index++) {
+        const item: testObject = this.correctLists[index];
+        console.log(item);
+        if (item.questionId === quesId) {
+          isExist = true;
+          itemIndex = index;
+          break;
+        }
+      }
+      if (isExist) {
+        this.correctLists[itemIndex].answerId = answerId;
+      } else {
+        this.correctLists.push({
+          questionId: quesId,
+          answerId: answerId,
+        });
+      }
+      // //////////////////
+      this.getQuestion(nextQuestId);
+
+    }
+    console.log(this.correctLists);
+  }
+
+
+  getQuestion(QuestId:string){
+   let isExist:boolean = false;
+    let itemIndex:number = 0;
+    for (let index = 0; index < this.correctLists.length; index++) {
+      const item: testObject = this.correctLists[index];
+      console.log(item);
+      if (item.questionId === QuestId) {
+        isExist = true;
+        itemIndex = index;
+        break;
+      }
+    }
+    console.log(isExist);
+    console.log(QuestId);
+    console.log(itemIndex);
+    console.log(this.correctLists[itemIndex].answerId);
+    console.log(this.answerIdValue);
+    if (isExist) {
+      // this.correctLists[itemIndex].answerId = answerId;
+      this.answerIdValue = this.correctLists[itemIndex].answerId
+    } else {
+      this.answerIdValue = ''
     }
   }
 
-  onBack() {
+  onBack(prevQuesId:string) {
     if (this.currentQuestion > 0) {
       this.currentQuestion--;
+      this.getQuestion(prevQuesId);
     }
   }
 
@@ -72,6 +120,8 @@ export class ExamComponent implements OnInit, OnDestroy {
     this.studentService.finishExam(this.examId, this.correctLists).subscribe(
       (resData: any) => {
         console.log(resData);
+        this.examResult = resData.data;
+        this.isSubmitted = true;
       },
       (err: any) => {
         console.log(err);
@@ -94,8 +144,8 @@ export class ExamComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
-    this.timerSubscription.unsubscribe();
+  navigateHistory() {
+    this.router.navigate(['student/examsHistory']);
   }
 }
 
@@ -103,32 +153,3 @@ interface testObject {
   questionId: string;
   answerId: string;
 }
-
-// answerlist
-// :
-// (2) [{…}, {…}]
-// description
-// :
-// "no description"
-// duration
-// :
-// 20
-// id
-// :
-// "96704770-f642-42d4-9486-3394463e5366"
-// questions
-// :
-// "Test question"
-// title
-// :
-// "Test"
-// titleExam
-// :
-// "Test Exam"
-
-// answer
-// :
-// "2"
-// id
-// :
-// "7e6c08ef-9716-497c-bd45-9ea0d0fd63cc"

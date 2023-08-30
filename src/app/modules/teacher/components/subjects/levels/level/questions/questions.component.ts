@@ -28,7 +28,7 @@ export class QuestionsComponent implements OnInit {
       questions: ['', [Validators.required]],
       isCorrect: [null],
       skillName: ['', [Validators.required]],
-      answersLists: new FormArray([],Validators.required),
+      answersLists: new FormArray([],[Validators.required,Validators.minLength(2)]),
       description: ['', [Validators.required]],
     });
   }

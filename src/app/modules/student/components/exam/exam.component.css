@@ -5,18 +5,28 @@
   height: 90vh;
 }
 
-.login-container {
+.exam-container {
   background-color: #fff;
-  padding: 2.2rem;
+  padding: 1.5rem;
+  width: 40rem;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 0rem 0.5rem 0rem 0.5rem;
 }
 
-.login-container h1 {
+.exam-container h2 {
+  text-align: center;
+}
+
+.questions-number {
+  text-align: end;
+}
+
+.countdown {
+  text-align: center;
+}
+
+.exam-container h1 {
   text-align: center;
 }
 
@@ -49,4 +59,14 @@
 .back-link span {
   color: #002140;
   font-weight: 600;
+}
+
+.submit-button , .next-button {
+  margin-top: 1rem;
+}
+
+.result {
+  width: 60%;
+  margin-left: 20%;
+  margin-top: 2rem;
 }

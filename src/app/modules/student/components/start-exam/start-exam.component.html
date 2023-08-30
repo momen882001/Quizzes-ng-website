@@ -1,2 +1,9 @@
-<p>start-exam works!</p>
-<button class="btn btn-primary" (click)="onStartExam()">Start</button>
+<div class="start-exam-container">
+  <h3>Do you want to start the exam ?</h3>
+  <button nz-button nzType="default" class="default-button" (click)="onCancel()">
+    Cancel
+  </button>
+  <button nz-button nzType="primary" (click)="onStartExam()">
+    Start
+  </button>
+</div>

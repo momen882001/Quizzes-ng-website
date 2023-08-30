@@ -59,7 +59,7 @@ export class CreateExamComponent implements OnInit {
               console.log(resData.data);
               Swal.fire({
                 icon: 'success',
-                title: 'You can copy exam link and share it with others',
+                title: 'Your exam link',
                 text: `${resData.data}`,
               })
               this.alertToggle = true;

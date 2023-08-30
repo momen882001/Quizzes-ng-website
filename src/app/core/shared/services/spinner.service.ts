@@ -9,7 +9,6 @@ import {
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { Time } from '@angular/common';
 
 const bodyScrollClass: string = 'loaderBodyScrollFix';
 @Injectable({

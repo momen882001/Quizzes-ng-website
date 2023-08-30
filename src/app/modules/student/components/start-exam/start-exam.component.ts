@@ -12,4 +12,7 @@ export class StartExamComponent implements OnInit {
   onStartExam() {
     this.router.navigate(['exam'], { relativeTo: this.route });
   }
+  onCancel() {
+    this.router.navigate(['student/examsHistory'])
+  }
 }
