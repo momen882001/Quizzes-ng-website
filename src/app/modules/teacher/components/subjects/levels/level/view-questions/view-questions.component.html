@@ -8,6 +8,17 @@
     [id]="questionEl.id"
   >
     <div class="question-content-container">
+      <div class="buttons-container">
+        <a
+          nz-popconfirm
+          nzPopconfirmTitle="Are you sure delete this question?"
+          (nzOnConfirm)="confirm(questionEl.id)"
+          (nzOnCancel)="cancel()"
+        >
+          <i nz-icon nzType="delete" nzTheme="outline"></i>
+        </a>
+      </div>
+
       <div class="question-container">
         <h5>Question :</h5>
         <p>{{ questionEl.questions }}</p>
@@ -27,18 +38,16 @@
           <p>{{ answerEl.answer }}</p>
           <h6>Answer check correction :</h6>
           <p>{{ answerEl.isCorrect }}</p>
+          <a
+            nz-popconfirm
+            nzPopconfirmTitle="Are you sure delete this answer?"
+            (nzOnConfirm)="confirmAnswerId(answerEl.id)"
+            (nzOnCancel)="cancel()"
+          >
+            <i nz-icon nzType="delete" nzTheme="outline"></i>
+          </a>
           <hr />
         </div>
-      </div>
-      <div class="buttons-container">
-        <a
-          nz-popconfirm
-          nzPopconfirmTitle="Are you sure delete this item?"
-          (nzOnConfirm)="confirm(questionEl.id)"
-          (nzOnCancel)="cancel()"
-        >
-          <button class="btn btn-outline-danger">Delete</button>
-        </a>
       </div>
     </div>
   </nz-collapse-panel>

@@ -24,4 +24,10 @@ export class ViewQuestionService {
       params: new HttpParams().set('id', questionId),
     });
   }
+
+  deleteAnswer(answerId: string) {
+    return this.http.delete(environment.APIUrl + 'DeleteAnswer', {
+      params: new HttpParams().set('id', answerId),
+    });
+  }
 }

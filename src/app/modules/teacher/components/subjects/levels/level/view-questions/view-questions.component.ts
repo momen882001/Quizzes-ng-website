@@ -43,6 +43,18 @@ export class ViewQuestionsComponent implements OnInit {
     );
   }
 
+  confirmAnswerId(answerId: string): void {
+    this.viewQuesService.deleteAnswer(answerId).subscribe(
+      (resData: any) => {
+        console.log(resData);
+        this.loadQuestions();
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
+  }
+
   private loadQuestions() {
     this.viewQuesService.getAllQuestions(this.levelId).subscribe(
       (resData: any) => {
