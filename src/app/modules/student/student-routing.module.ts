@@ -6,6 +6,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ExamsHistoryComponent } from './components/exams-history/exams-history.component';
 import { AuthGuard } from '../auth/auth-guard.service';
 import { ExamComponent } from './components/exam/exam.component';
+import { ExamDetailsComponent } from './components/exams-history/exam-details/exam-details.component';
 
 const studentRoutes: Routes = [
   {
@@ -17,6 +18,7 @@ const studentRoutes: Routes = [
       { path: 'examsHistory', component: ExamsHistoryComponent },
       { path: 'startExam/:examId', component: StartExamComponent },
       { path: 'startExam/:examId/exam', component: ExamComponent },
+      { path: 'examsHistory/:examId/:examDate', component: ExamDetailsComponent },
     ],
   },
 ];

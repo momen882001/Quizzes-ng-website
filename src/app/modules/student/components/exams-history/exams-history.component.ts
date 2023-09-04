@@ -8,22 +8,46 @@ import { StudentService } from '../../student.service';
 })
 export class ExamsHistoryComponent implements OnInit {
   constructor(private studentService: StudentService) {}
-  exams!: {
+
+  listOfCurrentPageData: readonly {
+    exmaId : string;
     title: string;
     questionCount: number;
     duration: number;
     score: number;
     examDate: string;
-  }[]
+  }[] = [];
+
+  exams: {
+    exmaId : string;
+    title: string;
+    questionCount: number;
+    duration: number;
+    score: number;
+    examDate: string;
+  }[] = [];
   ngOnInit(): void {
     this.loadExamsHistory();
+  }
+
+  onCurrentPageDataChange(
+    listOfCurrentPageData: readonly {
+      exmaId : string;
+      title: string;
+      questionCount: number;
+      duration: number;
+      score: number;
+      examDate: string;
+    }[]
+  ): void {
+    this.listOfCurrentPageData = listOfCurrentPageData;
   }
 
   private loadExamsHistory() {
     this.studentService.studentExamsHistory().subscribe(
       (resData: any) => {
         console.log(resData);
-        this.exams = resData.data
+        this.exams = resData.data;
       },
       (err: any) => {
         console.log(err);

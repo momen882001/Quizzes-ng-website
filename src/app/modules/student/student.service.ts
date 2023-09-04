@@ -24,4 +24,10 @@ export class StudentService {
       correctLists,
     });
   }
+
+  getExamQuestionsDetails(examId: string, examDate: string) {
+    return this.http.get(environment.APIUrl + 'StudentQuestionsHistory', {
+      params: new HttpParams().set('ExamId', examId).set('ExamDate', examDate),
+    });
+  }
 }

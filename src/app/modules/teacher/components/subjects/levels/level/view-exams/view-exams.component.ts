@@ -13,7 +13,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 })
 export class ViewExamsComponent implements OnInit {
   levelId!: string;
-  examsData!: viewExamsInterface[];
+  examsData: viewExamsInterface[] = []
 
   constructor(
     private route: ActivatedRoute,

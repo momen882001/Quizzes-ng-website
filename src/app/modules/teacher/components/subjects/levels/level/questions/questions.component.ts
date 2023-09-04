@@ -90,7 +90,6 @@ export class QuestionsComponent implements OnInit {
         this.levelId,
         answersLists
       );
-      this.validateForm.reset();
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {

@@ -9,18 +9,24 @@ import { ExamsHistoryComponent } from './components/exams-history/exams-history.
 import { ExamComponent } from './components/exam/exam.component';
 import { CountdownModule } from 'ngx-countdown';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-
+import { ExamDetailsComponent } from './components/exams-history/exam-details/exam-details.component';
 
 @NgModule({
-  declarations: [StudentComponent, StartExamComponent, ProfileComponent, ExamsHistoryComponent, ExamComponent],
+  declarations: [
+    StudentComponent,
+    StartExamComponent,
+    ProfileComponent,
+    ExamsHistoryComponent,
+    ExamComponent,
+    ExamDetailsComponent,
+  ],
   imports: [
     CommonModule,
-    StudentRoutingModule,
     SharedModule,
+    StudentRoutingModule,
     CountdownModule,
     ReactiveFormsModule,
-    FormsModule
-  ]
+    FormsModule,
+  ],
 })
-export class StudentModule { }
+export class StudentModule {}

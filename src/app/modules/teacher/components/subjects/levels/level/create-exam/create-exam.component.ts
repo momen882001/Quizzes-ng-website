@@ -57,20 +57,30 @@ export class CreateExamComponent implements OnInit {
             (resData: any) => {
               this.examLink = resData.data;
               console.log(resData.data);
-              Swal.fire({
-                icon: 'success',
-                title: 'Your exam link',
-                text: `${resData.data}`,
-              })
+              if (resData.data === null) {
+                Swal.fire({
+                  icon: 'error',
+                  title : 'Add more level questions',
+                  text: 'number of exam questions is less than number of level questions',
+                })
+              } else {
+                Swal.fire({
+                  icon: 'success',
+                  title : 'exam link',
+                  text: `${resData.data}`,
+                })
+              }
               this.alertToggle = true;
             },
             (err) => {
               console.log(err);
-              console.log(err.error.message);
+              Swal.fire({
+                icon: 'error',
+                text: `${err.error.Message}`,
+              })
             }
           );
       }
-      this.validateForm.reset();
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {

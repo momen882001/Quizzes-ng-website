@@ -1,0 +1,39 @@
+<nz-collapse class="collapse-container">
+  <nz-collapse-panel
+    *ngFor="let examEl of examDetails; let i = index"
+    [nzHeader]="'Exam ' + (i+1)"
+  >
+    <nz-collapse>
+      <nz-collapse-panel
+        *ngFor="let questionEl of examEl.historyLists; let i = index"
+        [nzHeader]="examEl.historyLists[i].questions.title"
+      >
+        <div class="question-container">
+          <h5>Question :</h5>
+          <p>{{ examEl.historyLists[i].questions.questions }}</p>
+        </div>
+        <div class="description-container">
+          <h5>Description :</h5>
+          <p>{{ examEl.historyLists[i].questions.questions }}</p>
+        </div>
+        <div class="answerlist-container">
+          <h5>Answer :</h5>
+          <p
+          class="answer"
+            *ngIf="examEl.historyLists[i].answer.isCorrect"
+            style="background-color: green"
+          >
+            {{ examEl.historyLists[i].answer.answer }}
+          </p>
+          <p
+          class="answer"
+            *ngIf="!examEl.historyLists[i].answer.isCorrect"
+            style="background-color: red"
+          >
+            {{ examEl.historyLists[i].answer.answer }}
+          </p>
+        </div>
+      </nz-collapse-panel>
+    </nz-collapse>
+  </nz-collapse-panel>
+</nz-collapse>

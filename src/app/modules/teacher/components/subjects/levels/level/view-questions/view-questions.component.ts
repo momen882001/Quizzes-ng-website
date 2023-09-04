@@ -3,6 +3,8 @@ import { ViewQuestionService } from './service/view-question.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { viewQuestionInterface } from '../level-interfaces';
 
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-view-questions',
   templateUrl: './view-questions.component.html',
@@ -14,7 +16,7 @@ export class ViewQuestionsComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  allQuestions!: viewQuestionInterface[];
+  allQuestions : viewQuestionInterface[] = []
   levelId!: string;
 
   ngOnInit(): void {
@@ -48,7 +50,11 @@ export class ViewQuestionsComponent implements OnInit {
         this.allQuestions = resData.data;
       },
       (err: any) => {
-        console.log(err);
+        // console.log(err);
+        // Swal.fire({
+        //   icon: 'error',
+        //   text: `${err.error.Message}`,
+        // })
       }
     );
   }

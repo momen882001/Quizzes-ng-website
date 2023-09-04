@@ -16,7 +16,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 export class LevelsComponent implements OnInit {
   validateForm!: UntypedFormGroup;
   createLevelFlag: boolean = false;
-  levels!: { id: string; name: string }[];
+  levels: { id: string; name: string }[] = []
   editMode: boolean = false;
   levelId!: string;
   subjectId!: string;

@@ -1,4 +1,7 @@
-<nz-collapse class="collapse-container">
+<div class="container" *ngIf="allQuestions.length === 0">
+  <h3>There are no questions!</h3>
+</div>
+<nz-collapse class="collapse-container" *ngIf="!(allQuestions.length === 0)">
   <nz-collapse-panel
     *ngFor="let questionEl of allQuestions; let i = index"
     [nzHeader]="i + 1 + '. ' + questionEl.title"

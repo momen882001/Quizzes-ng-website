@@ -12,7 +12,7 @@ export class ViewQuestionService {
 
   getAllQuestions(levelId: string) {
     return this.http.get<viewQuestionInterface[]>(
-      environment.APIUrl + 'ShowAllQuestion',
+      environment.APIUrl + 'ShowAllQuestions',
       {
         params: new HttpParams().set('levelId', levelId),
       }

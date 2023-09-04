@@ -15,7 +15,7 @@ import { SubjectsService } from './service/subjects.service';
 export class SubjectsComponent implements OnInit {
   validateForm!: UntypedFormGroup;
   createSubjectFlag: boolean = false;
-  subjects!: { id: string; name: string }[];
+  subjects: { id: string; name: string }[] = []
   editMode: boolean = false;
   subjectId!: string;
 

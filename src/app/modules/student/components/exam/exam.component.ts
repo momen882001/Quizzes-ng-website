@@ -1,7 +1,7 @@
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { StudentService } from '../../student.service';
-import { CountdownEvent } from 'ngx-countdown';
+import { CountdownComponent, CountdownEvent } from 'ngx-countdown';
 
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -21,7 +21,7 @@ export class ExamComponent implements OnInit {
     private router: Router
   ) {}
   examId!: string;
-  time!: number;
+  time : number = 30
   examData: any[] = [];
   titleExam!: string;
   currentQuestion: number = 0;
@@ -30,6 +30,7 @@ export class ExamComponent implements OnInit {
   examResult!: string;
 
   correctLists: testObject[] = [];
+  @ViewChild('cd', { static: false }) private countdown!: CountdownComponent;
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -41,7 +42,7 @@ export class ExamComponent implements OnInit {
         this.examData = resData.data;
         this.titleExam = resData.data[0].titleExam;
         this.time = resData.data[0].duration * 60;
-        console.log(resData.data[0].duration);
+        console.log(this.time);
       },
       (err: any) => {
         console.log(err);
@@ -49,7 +50,7 @@ export class ExamComponent implements OnInit {
     );
   }
 
-  onNext(quesId: string, answerId: string, nextQuestId:string) {
+  onNext(quesId: string, answerId: string, nextQuestId: string) {
     if (this.currentQuestion < this.examData.length - 1) {
       console.log('OO: ' + this.examData);
       this.currentQuestion++;
@@ -72,17 +73,14 @@ export class ExamComponent implements OnInit {
           answerId: answerId,
         });
       }
-      // //////////////////
       this.getQuestion(nextQuestId);
-
     }
     console.log(this.correctLists);
   }
 
-
-  getQuestion(QuestId:string){
-   let isExist:boolean = false;
-    let itemIndex:number = 0;
+  getQuestion(QuestId: string) {
+    let isExist: boolean = false;
+    let itemIndex: number = 0;
     for (let index = 0; index < this.correctLists.length; index++) {
       const item: testObject = this.correctLists[index];
       console.log(item);
@@ -98,14 +96,13 @@ export class ExamComponent implements OnInit {
     console.log(this.correctLists[itemIndex].answerId);
     console.log(this.answerIdValue);
     if (isExist) {
-      // this.correctLists[itemIndex].answerId = answerId;
-      this.answerIdValue = this.correctLists[itemIndex].answerId
+      this.answerIdValue = this.correctLists[itemIndex].answerId;
     } else {
-      this.answerIdValue = ''
+      this.answerIdValue = '';
     }
   }
 
-  onBack(prevQuesId:string) {
+  onBack(prevQuesId: string) {
     if (this.currentQuestion > 0) {
       this.currentQuestion--;
       this.getQuestion(prevQuesId);
@@ -113,6 +110,7 @@ export class ExamComponent implements OnInit {
   }
 
   onSubmit(quesId: string, answerId: string) {
+    this.countdown.stop();
     this.correctLists.push({
       questionId: quesId,
       answerId: answerId,
@@ -134,13 +132,16 @@ export class ExamComponent implements OnInit {
     console.log(event.target?.value);
   }
 
-  handleEvent(event: CountdownEvent) {
-    if (event.left === 0) {
+  handleEvent(event: CountdownEvent, quesId: string, answerId: string) {
+    console.log(event);
+    if (event.action === 'done') {
+      console.log('submit');
       Swal.fire({
         icon: 'success',
         title: 'Timeout',
         text: 'Exam Submitted',
       });
+      this.onSubmit(quesId, answerId);
     }
   }
 

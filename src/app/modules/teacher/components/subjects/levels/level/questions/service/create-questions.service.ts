@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment.prod';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +30,10 @@ export class CreateQuestionService {
       .subscribe(
         (resData: any) => {
           console.log(resData);
-          this.router.navigate(['/teacher/subjects'])
+          Swal.fire({
+            icon: 'success',
+            title : 'created successfully',
+          })
         },
         (err: any) => {
           console.log(err);
