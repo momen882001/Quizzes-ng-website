@@ -2,9 +2,11 @@
   class="table"
   #basicTable
   [nzData]="exams"
+  [nzTotal]="totalCount"
+  [nzPageSize]="5"
   nzShowPagination
-  nzShowSizeChanger
-  (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
+  [nzFrontPagination]="false"
+  (nzPageIndexChange)="onPageIndexChange($event)"
 >
   <thead>
     <tr>
@@ -16,7 +18,11 @@
     </tr>
   </thead>
   <tbody>
-    <tr style="cursor: pointer;" *ngFor="let examEl of exams" [routerLink]="[examEl.exmaId , examEl.examDate]">
+    <tr
+      style="cursor: pointer"
+      *ngFor="let examEl of exams"
+      [routerLink]="[examEl.exmaId, examEl.examDate]"
+    >
       <td>{{ examEl.title }}</td>
       <td>{{ examEl.questionCount }}</td>
       <td>{{ examEl.duration }}</td>

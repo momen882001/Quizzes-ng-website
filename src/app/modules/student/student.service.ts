@@ -14,8 +14,12 @@ export class StudentService {
     });
   }
 
-  studentExamsHistory() {
-    return this.http.get(environment.APIUrl + 'StudentHistory');
+  studentExamsHistory(pageSize: number, pageNumber: number) {
+    return this.http.get(environment.APIUrl + 'StudentHistory', {
+      params: new HttpParams()
+        .set('PageNumber', pageNumber)
+        .set('PageSize', pageSize),
+    });
   }
 
   finishExam(examId: string, correctLists: any[]) {
