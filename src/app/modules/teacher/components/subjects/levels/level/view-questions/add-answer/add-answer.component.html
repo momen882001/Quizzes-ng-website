@@ -1,0 +1,38 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <nz-form-control
+    nzValidatingTip="Validating..."
+    [nzErrorTip]="wrongAnswersErrorTpl"
+  >
+    <nz-form-label nzRequired>Answer </nz-form-label>
+    <nz-input-group style="width: auto">
+      <input
+        style="width: 100%"
+        class="wrong-input"
+        nz-input
+        placeholder="Write your answer"
+        formControlName="answer"
+      />
+    </nz-input-group>
+  </nz-form-control>
+  <ng-template #wrongAnswersErrorTpl let-control>
+    <ng-container *ngIf="control.hasError('required')"
+      >Please input your answer!</ng-container
+    >
+  </ng-template>
+  <nz-form-control
+    nzHasFeedback
+    nzErrorTip="Please select if your answer is true or not!"
+  >
+    <nz-form-label nzRequired>Choose correction of answer?</nz-form-label>
+    <nz-select
+      formControlName="isCorrect"
+      nzPlaceHolder="Select a option and change input text above"
+    >
+      <nz-option [nzValue]="true" nzLabel="True"></nz-option>
+      <nz-option [nzValue]="false" nzLabel="False"></nz-option>
+    </nz-select>
+  </nz-form-control>
+      <button class="submit-button" nz-button nzType="primary">
+        {{editFlag ? 'Edit' : 'Submit'}}
+      </button>
+</form>

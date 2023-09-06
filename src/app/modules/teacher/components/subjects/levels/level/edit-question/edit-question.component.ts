@@ -8,6 +8,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
   templateUrl: './edit-question.component.html',
   styleUrls: ['./edit-question.component.css'],
 })
+
 export class EditQuestionComponent implements OnInit {
   validateForm!: FormGroup;
   quesId!: string;

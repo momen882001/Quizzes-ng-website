@@ -49,4 +49,26 @@ export class CreateQuestionService {
       questions,
     });
   }
+
+  addAnswer(answer: string, isCorrect: boolean, questionId: string) {
+    return this.http.post(environment.APIUrl + 'AddAnswer', {
+      answer,
+      isCorrect,
+      questionId,
+    });
+  }
+
+  editAnswer(
+    id: string,
+    answer: string,
+    isCorrect: boolean,
+    questionId: string
+  ) {
+    return this.http.put(environment.APIUrl + 'EditAnswer', {
+      id,
+      answer,
+      isCorrect,
+      questionId,
+    });
+  }
 }

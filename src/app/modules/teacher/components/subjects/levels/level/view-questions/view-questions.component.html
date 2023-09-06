@@ -32,6 +32,9 @@
       </div>
       <div class="answerlist-container">
         <h5>Answers List :</h5>
+        <a [routerLink]="['addAnswer', questionEl.id]">
+          <i nz-icon nzType="plus" nzTheme="outline"></i>
+        </a>
         <hr />
         <div
           class="answers"
@@ -53,6 +56,9 @@
               nzType="delete"
               nzTheme="outline"
             ></i>
+          </a>
+          <a [routerLink]="['editAnswer', questionEl.id, answerEl.id]">
+            <i nz-icon nzType="edit" nzTheme="outline"></i>
           </a>
           <hr />
         </div>

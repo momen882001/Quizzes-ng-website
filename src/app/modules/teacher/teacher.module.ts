@@ -14,6 +14,7 @@ import { ViewQuestionsComponent } from './components/subjects/levels/level/view-
 import { ViewExamsComponent } from './components/subjects/levels/level/view-exams/view-exams.component';
 import { TeacherHistoryComponent } from './components/subjects/levels/level/teacher-history/teacher-history.component';
 import { EditQuestionComponent } from './components/subjects/levels/level/edit-question/edit-question.component';
+import { AddAnswerComponent } from './components/subjects/levels/level/view-questions/add-answer/add-answer.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { EditQuestionComponent } from './components/subjects/levels/level/edit-q
     ViewExamsComponent,
     TeacherHistoryComponent,
     EditQuestionComponent,
+    AddAnswerComponent,
   ],
   imports: [
     CommonModule,
