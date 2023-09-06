@@ -27,28 +27,39 @@ export class AddAnswerComponent implements OnInit {
       this.answerId = params['answerId'];
       this.editFlag = params['answerId'] != null;
     });
+    // this.validateForm = this.fb.group({
+    //   answer: ['', Validators.required],
+    //   isCorrect: [null, Validators.required],
+    // });
+    this.initForm();
+  }
+
+  private initForm() {
+    if (this.editFlag) {
+      this.questionService.getAnswer(this.answerId).subscribe(
+        (resData: any) => {
+          console.log(resData);
+          this.validateForm.patchValue({
+            answer: resData.data.answer,
+            isCorrect: resData.data.isCorrect,
+          });
+        },
+        (err: any) => {
+          console.log(err);
+        }
+      );
+    }
     this.validateForm = this.fb.group({
       answer: ['', Validators.required],
       isCorrect: [null, Validators.required],
     });
   }
 
-  // private initForm() {
-  //   if (this.editFlag) {
-  //     this.validateForm.patchValue({
-  //       answer : ,
-  //       isCorrect : ,
-  //     })
-  //   }
-  //   this.validateForm = this.fb.group({
-  //     answer: ['', Validators.required],
-  //     isCorrect: [null, Validators.required],
-  //   });
-  // }
-
   submitForm(): void {
     if (this.validateForm.valid) {
       if (this.editFlag) {
+        console.log('edit');
+
         const answer = this.validateForm.value.answer;
         const isCorrect = this.validateForm.value.isCorrect;
         this.questionService
@@ -56,7 +67,7 @@ export class AddAnswerComponent implements OnInit {
           .subscribe(
             (resData: any) => {
               console.log(resData);
-              this.router.navigate(['../../'], { relativeTo: this.route });
+              this.router.navigate(['../../../'], { relativeTo: this.route });
             },
             (err: any) => {
               console.log(err);

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CreateQuestionService } from '../questions/service/create-questions.service';
+import { CreateQuestionService } from '../../questions/service/create-questions.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 

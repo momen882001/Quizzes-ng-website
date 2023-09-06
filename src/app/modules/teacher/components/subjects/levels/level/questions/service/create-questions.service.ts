@@ -58,6 +58,12 @@ export class CreateQuestionService {
     });
   }
 
+  getAnswer(answerId: string) {
+    return this.http.get(environment.APIUrl + 'GetAnswerById', {
+      params: new HttpParams().set('AnswerId', answerId),
+    });
+  }
+
   editAnswer(
     id: string,
     answer: string,

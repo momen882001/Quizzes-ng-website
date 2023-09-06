@@ -11,7 +11,7 @@ import { CreateExamComponent } from './components/subjects/levels/level/create-e
 import { AuthGuard } from '../auth/auth-guard.service';
 import { ViewExamsComponent } from './components/subjects/levels/level/view-exams/view-exams.component';
 import { TeacherHistoryComponent } from './components/subjects/levels/level/teacher-history/teacher-history.component';
-import { EditQuestionComponent } from './components/subjects/levels/level/edit-question/edit-question.component';
+import { EditQuestionComponent } from './components/subjects/levels/level/view-questions/edit-question/edit-question.component';
 import { AddAnswerComponent } from './components/subjects/levels/level/view-questions/add-answer/add-answer.component';
 
 const teacherRoutes: Routes = [
