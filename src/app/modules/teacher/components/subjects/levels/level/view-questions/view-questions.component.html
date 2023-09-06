@@ -9,13 +9,16 @@
   >
     <div class="question-content-container">
       <div class="buttons-container">
+        <a [routerLink]="['editQues', questionEl.id]">
+          <i nz-icon nzType="edit" nzTheme="outline"></i>
+        </a>
         <a
           nz-popconfirm
           nzPopconfirmTitle="Are you sure delete this question?"
           (nzOnConfirm)="confirm(questionEl.id)"
           (nzOnCancel)="cancel()"
         >
-          <i nz-icon nzType="delete" nzTheme="outline"></i>
+          <i class="delete-icon" nz-icon nzType="delete" nzTheme="outline"></i>
         </a>
       </div>
 
@@ -44,7 +47,12 @@
             (nzOnConfirm)="confirmAnswerId(answerEl.id)"
             (nzOnCancel)="cancel()"
           >
-            <i nz-icon nzType="delete" nzTheme="outline"></i>
+            <i
+              class="delete-icon"
+              nz-icon
+              nzType="delete"
+              nzTheme="outline"
+            ></i>
           </a>
           <hr />
         </div>

@@ -11,6 +11,7 @@ import { CreateExamComponent } from './components/subjects/levels/level/create-e
 import { AuthGuard } from '../auth/auth-guard.service';
 import { ViewExamsComponent } from './components/subjects/levels/level/view-exams/view-exams.component';
 import { TeacherHistoryComponent } from './components/subjects/levels/level/teacher-history/teacher-history.component';
+import { EditQuestionComponent } from './components/subjects/levels/level/edit-question/edit-question.component';
 
 const teacherRoutes: Routes = [
   {
@@ -29,6 +30,10 @@ const teacherRoutes: Routes = [
       {
         path: 'subjects/:subjectId/:levelId/viewQues',
         component: ViewQuestionsComponent,
+      },
+      {
+        path: 'subjects/:subjectId/:levelId/viewQues/editQues/:quesId',
+        component: EditQuestionComponent,
       },
       {
         path: 'subjects/:subjectId/:levelId/createQues',

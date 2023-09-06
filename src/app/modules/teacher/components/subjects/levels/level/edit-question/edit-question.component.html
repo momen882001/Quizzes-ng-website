@@ -1,6 +1,6 @@
 <div class="container questions-container">
   <div class="row">
-    <h3>Create Questions</h3>
+    <h3>Edit Questions</h3>
     <div class="col-12 questions-column">
       <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
         <nz-form-item>
@@ -46,80 +46,6 @@
             </ng-template>
           </nz-form-control>
         </nz-form-item>
-        <!-- Start answerList -->
-        <nz-form-item formArrayName="answersLists">
-          <nz-form-control
-            nzValidatingTip="Validating..."
-            [nzErrorTip]="answersListErrorTpl"
-          >
-            <ng-template #answersListErrorTpl let-control>
-              <ng-container *ngIf="control.hasError('required')"
-                >Please input your answers!</ng-container
-              >
-            </ng-template>
-            <nz-form-item
-              *ngFor="let control of getControls(); let i = index"
-              [formGroupName]="i"
-              class="answer-item"
-            >
-              <nz-form-control
-                nzValidatingTip="Validating..."
-                [nzErrorTip]="wrongAnswersErrorTpl"
-              >
-                <nz-form-label nzRequired>{{ i + 1 }}. answer </nz-form-label>
-                <nz-input-group style="width: auto">
-                  <input
-                    style="width: 100%"
-                    class="wrong-input"
-                    nz-input
-                    placeholder="Write your answer"
-                    formControlName="answer"
-                  />
-                </nz-input-group>
-                <ng-template #wrongAnswersErrorTpl let-control>
-                  <ng-container *ngIf="control.hasError('required')"
-                    >Please input your answer!</ng-container
-                  >
-                </ng-template>
-              </nz-form-control>
-              <nz-form-control
-                nzHasFeedback
-                nzErrorTip="Please select if your answer is true or not!"
-              >
-                <nz-form-label nzRequired
-                  >Choose correction of answer?</nz-form-label
-                >
-                <nz-select
-                  formControlName="isCorrect"
-                  nzPlaceHolder="Select a option and change input text above"
-                >
-                  <nz-option [nzValue]="true" nzLabel="True"></nz-option>
-                  <nz-option [nzValue]="false" nzLabel="False"></nz-option>
-                </nz-select>
-              </nz-form-control>
-              <i
-                nz-icon
-                nzType="minus-circle-o"
-                class="dynamic-delete-button"
-                (click)="removeField(i)"
-              ></i>
-            </nz-form-item>
-          </nz-form-control>
-        </nz-form-item>
-        <!-- End answerList -->
-        <nz-form-item class="addAnswer-item">
-          <nz-form-control>
-            <button
-              nz-button
-              nzType="dashed"
-              class="add-button"
-              (click)="addField()"
-            >
-              <i nz-icon nzType="plus"></i>
-              Add answer
-            </button>
-          </nz-form-control>
-        </nz-form-item>
         <nz-form-item>
           <nz-form-control nzHasFeedback nzErrorTip="Please select skill level!">
             <nz-form-label nzRequired>Skill level</nz-form-label>
@@ -147,9 +73,8 @@
         <nz-form-item>
           <nz-form-control [nzSpan]="20">
             <button class="submit-button" nz-button nzType="primary">
-              Submit
+              Edit
             </button>
-            <button nz-button (click)="resetForm($event)">Reset</button>
           </nz-form-control>
         </nz-form-item>
       </form>

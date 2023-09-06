@@ -13,6 +13,7 @@ import { CreateExamComponent } from './components/subjects/levels/level/create-e
 import { ViewQuestionsComponent } from './components/subjects/levels/level/view-questions/view-questions.component';
 import { ViewExamsComponent } from './components/subjects/levels/level/view-exams/view-exams.component';
 import { TeacherHistoryComponent } from './components/subjects/levels/level/teacher-history/teacher-history.component';
+import { EditQuestionComponent } from './components/subjects/levels/level/edit-question/edit-question.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { TeacherHistoryComponent } from './components/subjects/levels/level/teac
     ViewQuestionsComponent,
     ViewExamsComponent,
     TeacherHistoryComponent,
+    EditQuestionComponent,
   ],
   imports: [
     CommonModule,
