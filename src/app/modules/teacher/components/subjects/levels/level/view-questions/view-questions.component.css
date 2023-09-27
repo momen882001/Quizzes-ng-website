@@ -16,3 +16,18 @@
   font-size: larger;
   color: red;
 }
+
+.edit-answer-icon,
+.edit-question-icon {
+  font-size: larger;
+  color: green;
+  opacity: 0.7;
+}
+
+.edit-answer-icon {
+  margin-left: 0.6rem;
+}
+
+.edit-question-icon {
+  margin-right: 0.6rem;
+}

@@ -1,0 +1,17 @@
+.add-answer-container {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 30rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.answer-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}

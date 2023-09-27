@@ -76,7 +76,8 @@ export class CreateExamComponent implements OnInit {
               console.log(err);
               Swal.fire({
                 icon: 'error',
-                text: `${err.error.Message}`,
+                title : 'Add more level questions',
+                text: 'number of exam questions is less than number of level questions',
               })
             }
           );

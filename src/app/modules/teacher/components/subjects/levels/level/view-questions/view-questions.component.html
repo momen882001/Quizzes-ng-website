@@ -10,7 +10,7 @@
     <div class="question-content-container">
       <div class="buttons-container">
         <a [routerLink]="['editQues', questionEl.id]">
-          <i nz-icon nzType="edit" nzTheme="outline"></i>
+          <i class="edit-question-icon" nz-icon nzType="edit" nzTheme="outline"></i>
         </a>
         <a
           nz-popconfirm
@@ -58,7 +58,7 @@
             ></i>
           </a>
           <a [routerLink]="['editAnswer', questionEl.id, answerEl.id]">
-            <i nz-icon nzType="edit" nzTheme="outline"></i>
+            <i class="edit-answer-icon" nz-icon nzType="edit" nzTheme="outline"></i>
           </a>
           <hr />
         </div>

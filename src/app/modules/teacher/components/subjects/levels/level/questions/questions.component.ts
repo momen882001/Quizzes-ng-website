@@ -8,6 +8,8 @@ import {
   FormArray,
 } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-questions',
@@ -28,7 +30,10 @@ export class QuestionsComponent implements OnInit {
       questions: ['', [Validators.required]],
       isCorrect: [null],
       skillName: ['', [Validators.required]],
-      answersLists: new FormArray([],[Validators.required,Validators.minLength(2)]),
+      answersLists: new FormArray(
+        [],
+        [Validators.required, Validators.minLength(2)]
+      ),
       description: ['', [Validators.required]],
     });
   }
@@ -82,14 +87,32 @@ export class QuestionsComponent implements OnInit {
       const questions = this.validateForm.value.questions;
       const skillName = this.validateForm.value.skillName;
       const answersLists = this.validateForm.value.answersLists;
-      this.questionService.createQuestion(
-        title,
-        description,
-        questions,
-        skillName,
-        this.levelId,
-        answersLists
-      );
+      this.questionService
+        .createQuestion(
+          title,
+          description,
+          questions,
+          skillName,
+          this.levelId,
+          answersLists
+        )
+        .subscribe(
+          (resData: any) => {
+            console.log(resData);
+            Swal.fire({
+              icon: 'success',
+              title : 'Created Successfully',
+            })
+            this.validateForm.reset();
+          },
+          (err: any) => {
+            console.log(err);
+            Swal.fire({
+              icon: 'error',
+              text: 'There should be one true answer',
+            })
+          }
+        );
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {

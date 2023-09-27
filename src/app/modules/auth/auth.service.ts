@@ -18,7 +18,7 @@ export class AuthService {
   ) {}
 
   signUp(signupData: User): void {
-    this.http.post<User>(environment.APIUrl + 'Register', signupData).subscribe(
+    this.http.post<User>(environment.APIUrl + 'Registeration', signupData).subscribe(
       (resData: any) => {
         this.message.create('success', 'Signed up successfully', {
           nzDuration: 3000,
@@ -27,6 +27,10 @@ export class AuthService {
       },
       (err: any) => {
         console.log(err);
+        // Swal.fire({
+        //   icon: 'error',
+        //   text: `${err.error.Message}`,
+        // })
       }
     );
   }
